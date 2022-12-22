@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="login-container">
+		<div class="login-form">
+			<form class="login-page" [formGroup]="loginForm" (ngSubmit)="loginUser()" #loginPage = "ngForm">
+					<h4>Sign In</h4>
+					<div class="username">
+						<label for="">EMAIL ADDRESS</label><br>
+						<input type="text" formControlName="loginUser" [class.is-invalid]="loginPage.submitted &&
+                        loginForm.get('loginUser')?.invalid || loginForm.get('loginUser')?.touched && loginForm.get('loginUser')?.invalid" placeholder="Enter Your Email Address"
+							class="form-control" required>
+						<div class="invalid-feedback" *ngIf="loginForm.controls.loginUser?.errors?.['required']">
+							Email Address is Required
+						</div>
+						<div class="invalid-feedback" *ngIf="loginForm.controls.loginUser?.errors?.['pattern']">
+							Enter Valid Email Address
+							</div>
+					</div>
+					<div class="username">
+						<label for="">PASSWORD</label><br>
+						<input type="password" formControlName="loginPassword" [class.is-invalid]="loginPage.submitted &&
+                        loginForm.get('loginPassword')?.invalid || loginForm.get('loginPassword')?.touched && loginForm.get('loginPassword')?.invalid" placeholder="Enter Your Password"
+							class="form-control">
+						<div class="invalid-feedback" *ngIf="loginForm.controls.loginPassword?.errors?.['required']">
+							Password is Required
+						</div>
+					</div>
+					<div class="button">
+						<button class="btn btn-primary" type="submit">Sign In</button>
+					</div>
+			</form>
+			<div class="second-part">
+				<h3>Welcome to <br>Soni Jewellers</h3>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- linear-gradient(135deg, #f75959 0%, #f35587 100%) -->
