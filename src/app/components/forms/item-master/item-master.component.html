@@ -1,0 +1,55 @@
+<app-dashboard-sidemenu></app-dashboard-sidemenu>
+
+<!-- Start Main Content Wrapper Area -->
+<div class="main-content d-flex flex-column">
+
+    <app-dashboard-navbar></app-dashboard-navbar>
+
+    <!-- Breadcrumb Area -->
+    <div class="breadcrumb-area" *ngFor="let Content of breadcrumb;">
+        <h1>{{Content.title}}</h1>
+        <ol class="breadcrumb">
+            <li class="item"><a routerLink="/">Home</a></li>
+            <li class="item"><a routerLink="/dashboard">{{Content.subTitle}}</a></li>
+            <li class="item">{{Content.title}}</li>
+        </ol>
+    </div>
+    <!-- End Breadcrumb Area -->
+
+    <!-- Start -->
+    <div class="add-listings-box1">
+        <!-- Start -->
+        <!-- <prime-toast></prime-toast> -->
+        <!-- End -->
+        <form [formGroup]="itemMaster" (ngSubmit)="itemMasterSubmit(itemForm)" #itemForm="ngForm">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label for="status">Product Name<span class="star_class">*</span></label>
+                    <input type="text" class="form-control" formControlName="itemCode" placeholder="Enter Product Name"
+                        [class.is-invalid]="(itemForm.submitted &&
+                        itemMaster.get('itemCode')?.invalid) ||
+                        (itemMaster.get('itemCode')?.touched &&
+                        itemMaster.get('itemCode')?.invalid)" required>
+                    <div class="invalid-feedback"> Product Name is Required </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Product Weight(kg)<span class="star_class">*</span></label>
+                    <input type="number" class="form-control" min="1" formControlName="rawPartWeight" maxlength="6" placeholder="Enter Product weight"
+                        [class.is-invalid]="itemForm.submitted &&
+                        itemMaster.get('rawPartWeight')?.invalid ||
+                        (itemMaster.get('rawPartWeight')?.touched &&
+                        itemMaster.get('rawPartWeight')?.invalid)" required>
+                    <div class="invalid-feedback"> Product Weight is Required
+                    </div>
+                </div>
+                <div class="add-listings-btn col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <button type="submit" class="submit_btn">{{submitButton}}</button>
+                        <button type="reset" class="mx-3 reset_btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- End -->
+</div>

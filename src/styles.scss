@@ -1,18 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
 :root {
-	--color-white: #ffffff;
-	--mainColor : linear-gradient(135deg, #f75959 0%, #f35587 100%)
+    --fontFamily: 'Work Sans', sans-serif;
+    --mainColor: linear-gradient(135deg, #f75959 0%, #f35587 100%);
+    --mainColor2: #f75959;
+    --optionalColor: #666666;
+    --whiteColor: #ffffff;
+    --blackColor: #221638;
+    --fontSize: 13px;
+    --transition: .5s;
 }
 
-/* You can add global styles to this file, and also import other style files */
+
 // :root {
-//     --fontFamily: 'Work Sans', sans-serif;
-//     --mainColor: #0ec6c6;
-//     --mainColor2: #30eded;
+// 	--color-white: #ffffff;
+// 	--mainColor : linear-gradient(135deg, #f75959 0%, #f35587 100%);
+//     --mainColor2: #0ec6c6;
 //     --optionalColor: #666666;
 //     --whiteColor: #ffffff;
 //     --blackColor: #221638;
 //     --fontSize: 13px;
 //     --transition: .5s;
+
 // }
 body {
     padding: 0;
