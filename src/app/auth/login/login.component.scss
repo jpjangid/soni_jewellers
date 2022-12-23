@@ -4,12 +4,13 @@
 	.login-form{
 		height: 400px;
 		display: flex;
+		margin: 0 100px;
 		justify-content: center;
 		.login-page {
 			box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%) !important;
 			border-radius: 5px;
 			padding: 40px;
-			width: 400px;
+			width: 100%;
 	
 			.username {
 				margin: 15px 0;
@@ -41,11 +42,12 @@
 	
 		.second-part {
 			background: var(--mainColor);
-			width: 400px;
+			padding: 40px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			color: #fff;
+			width: 100%;
 	
 			h3 {
 				text-align: center;
@@ -68,12 +70,16 @@
 }
 
 
-@media(max-width : 425px) {
-	.login-form{
-		// display: block!important;
-		flex-direction: column-reverse;
-		.second-part {
-			height: 400px!important;
+@media(max-width : 426px) {
+	.login-container{
+		margin-top: 60px!important;
+		.login-form{
+			margin: 0!important;
+			// display: block!important;
+			flex-direction: column-reverse;
+			.second-part {
+				height: 400px!important;
+			}
 		}
 	}
 }
