@@ -19,7 +19,6 @@ export class ItemMasterComponent implements OnInit {
 
   ngOnInit(): void {
     this.date = new Date();
-    this.itemMaster.controls['itemDate'].setValue(this.myDate);
   }
 
   breadcrumb = [
