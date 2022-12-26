@@ -135,7 +135,5 @@ export class AppUtility {
   getImageUrl(url : any){
     return `http://103.155.84.143:9072/SupplierOnboarding/`+url;
   }
+
 }
-
-
-//, paymentDropdown , purposeDropdown , manufacturingData , materialofconstructionData , otherCategoryData

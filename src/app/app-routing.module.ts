@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardGuard } from './AuthGuards/auth-guard.guard';
 import { LoginComponent } from './components/auth/login/login.component';
+import { BillGenerateComponent } from './components/forms/bill-generate/bill-generate.component';
 import { ItemMasterComponent } from './components/forms/item-master/item-master.component';
 // import { CostBreakerComponent } from './components/custom/admin-components/cost-breaker/cost-breakup.component';
 // import { ItemMasterComponent } from './components/custom/admin-components/item-master/item-master.component';
@@ -60,8 +61,9 @@ const routes: Routes = [
     {path: '', redirectTo:'login' , pathMatch: 'full'},
     {path: 'login', component: LoginComponent , pathMatch: 'full'},
     // {path: 'register/:email', component: UserAccountComponent , pathMatch: 'full'},
-    {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full'},
     // {path: 'reset-password', component: ResetAccountInfoComponent , pathMatch: 'full'},
+    {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full'},
+    {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full'},
     // {path: 'verification', component: VerificationFormComponent , pathMatch: 'full'},
     // {path: 'supplierOnboarding', component: SupplierOnboardingComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},
     // {path: 'raiseChangeRequest', component: SupplierchangerequestComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},
