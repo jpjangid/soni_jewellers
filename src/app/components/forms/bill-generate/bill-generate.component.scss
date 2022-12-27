@@ -199,55 +199,19 @@
 }
 
 ::ng-deep{
-    .p-column-filter-row .p-column-filter-menu-button, .p-column-filter-row .p-column-filter-clear-button{
-        display: none!important;
+    .p-progressbar{
+        height: 18px;
+        width: 250px;
     }
-    p-calendar .p-inputtext{
-        border: 1px solid #d5d5d5 !important;
-        border-radius: 5px;
-        background-color: #f9f9f9 !important;
-        padding-top: 6px;
-    }
-    .p-multiselect {
-        height: 33px!important;
+
+    p-progressbar{
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #d5d5d5 !important;
-        border-radius: 5px;
-        background-color: #f9f9f9 !important;
-        .p-multiselect-label.p-placeholder{
-            font-size: 14px;
-        }
-        .p-multiselect-label{
-            height: 100%!important;
-        }
+        justify-content: right;
+        margin: 10px 0;
     }
 
-    .p-multiselect .p-multiselect-label.p-placeholder{
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-    }
-
-    .p-multiselect .p-multiselect-label , .p-multiselect-panel .p-multiselect-items .p-multiselect-item{
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-    }
-
-    .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight , .p-multiselect-item:focus{
-        background: var(--whiteColor);
-        color: var(--mainColor);
-        border: none;
-        outline: none;
-        box-shadow: none;
-    }
-
-    .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus{
-        border: none;
-        outline: none;
-        box-shadow: none;
+    .p-progressbar .p-progressbar-value{
+        background: #28a745!important;
     }
 }
         

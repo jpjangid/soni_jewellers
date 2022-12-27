@@ -35,77 +35,79 @@
         </div>
 
         <!-- Start -->
-        <div class="add-listings-box1">
-            <div class="row">
-                <div class="col-lg-3 col-md-12 form-group">
-                    <label for="status">Product Name<span class="star_class">*</span></label>
-                    <select name="" id="" class="form-control form-select"
-                        formControlName="productId"
-                        (change)="getProductWeight($event)">
-                        <option value="" disabled>Select Product Name</option>
-                        <ng-container *ngFor="let product of productMasterList">
-                            <option [value]="product.productId">{{product.productName}}</option>
-                        </ng-container>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-12 form-group">
-                    <label>Product Weight<span class="star_class">*</span></label>
-                    <span class="form-control">{{itemMaster.value.productWeight
-                        ? itemMaster.value.productWeight : 'Enter Product
-                        Weight'}}</span>
-                </div>
-                <div class="col-lg-3 col-md-12 form-group">
-                    <label>Product Quantity<span class="star_class">*</span></label>
-                    <input type="number" class="form-control" min="1"
-                        formControlName="productQuantity"
-                        placeholder="Enter Product weight"
-                        (input)="getNetWeight()"
-                        [class.is-invalid]="itemForm.submitted &&
-                        itemMaster.get('productQuantity')?.invalid ||
-                        (itemMaster.get('productQuantity')?.touched &&
-                        itemMaster.get('productQuantity')?.invalid)" required>
-                    <div class="invalid-feedback"> Product Quantity is Required
+        <div class="add-listings-box1" formArrayName="productList">
+            <p-progressBar [style]="{'height': '20px'}"
+                        [value]="totalNetWeight" [showValue]="false"></p-progressBar>
+            <ng-container *ngFor="let form of getProductList().controls; index
+                as index; last as last">
+                <div class="row" [formGroupName]="index">
+                    <div class="col-lg-3 col-md-12 form-group">
+                        <label for="status">{{index+1}}. Product Name<span
+                                class="star_class">*</span></label>
+                        <select name="" id="" class="form-control form-select"
+                            formControlName="productId"
+                            (change)="getProductWeight($event , index)">
+                            <option value="" disabled>Select Product Name</option>
+                            <ng-container *ngFor="let product of
+                                productMasterList">
+                                <option [value]="product.productId">{{product.productName}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-12 form-group">
+                        <label>Product Weight<span class="star_class">*</span></label>
+                        <span class="form-control">{{form.value.productWeight ?
+                            form.value.productWeight : 'Enter Product Weight'}}</span>
+                    </div>
+                    <div class="col-lg-3 col-md-12 form-group">
+                        <label>Product Quantity<span class="star_class">*</span></label>
+                        <input type="number" class="form-control" min="1"
+                            formControlName="productQuantity"
+                            placeholder="Enter Product weight"
+                            (input)="getNetWeight(index)"
+                            [class.is-invalid]="itemForm.submitted &&
+                            itemMaster.get('productQuantity')?.invalid ||
+                            (itemMaster.get('productQuantity')?.touched &&
+                            itemMaster.get('productQuantity')?.invalid)"
+                            required>
+                        <div class="invalid-feedback"> Product Quantity is
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 form-group">
+                        <label>Product Net Weight<span class="star_class">*</span></label>
+                        <span class="form-control">{{form.value.productNetWeight
+                            ? (form.value.productNetWeight | number:'0.1-2') :
+                            'Enter Product Net Weight'}}</span>
+
+                    </div>
+                    <div class="add-listings-btn">
+                        <div class="col-lg-12 form-group d-flex"
+                            style="margin-top: 0!important;">
+                            <div class="col-lg-4 p-0">
+                                <button type="button" class="submit_btn"
+                                    *ngIf="last" (click)="addProduct()"
+                                    style="padding : 6px 15px 6px;
+                                    margin-right: 5px; height: 35px;">+</button>
+                                <button type="button" class="submit_btn"
+                                    *ngIf="last && index> 0"
+                                    (click)="removeProduct(index)"
+                                    style="padding : 6px 15px 6px;
+                                    margin-right: 5px; height: 35px;">-</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-12 form-group">
-                    <label>Product Net Weight<span class="star_class">*</span></label>
-                    <span class="form-control">{{itemMaster.value.productNetWeight
-                        ? (itemMaster.value.productNetWeight | number:'0.1-2') :
-                        'Enter Product Net Weight'}}</span>
-                </div>
-                <div class="add-listings-btn">
-                    <div class="col-lg-2 form-group d-flex"
-                        style="margin-top: 0!important;">
-                        <button type="button" class="submit_btn" (click)="saveProduct()" style="padding : 6px 15px 6px;
-                            margin-right: 5px; height: 35px;">+</button>
-                    </div>
-                </div>
+            </ng-container>
+
+            {{totalNetWeight}}
+
+            <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
+                <button class="submit_btn">Next</button>
             </div>
         </div>
-        <!-- End -->
 
-        <div class="add-listings-box1">
-            <table class="table">
-                <thead>
-                    <th>product Name</th>
-                    <th>product Weight</th>
-                    <th>product Quantity</th>
-                    <th style="min-width: 130px;">product Net Weight</th>
-                    <!-- <th>Total</th> -->
-                </thead>
-                <tbody *ngFor="let product of productList">
-                    <tr>
-                        <ng-container *ngFor="let data of productMasterList">
-                            <td *ngIf="data.productId == product.productId">{{data.productName}}</td>
-                        </ng-container>
-                        <td>{{product.productWeight}}</td>
-                        <td>{{product.productQuantity}}</td>
-                        <td>{{product.productNetWeight | number:'0.1-2'}}</td>
-                        <!-- <td></td> -->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- End -->
     </form>
     <!-- End -->
 </div>
