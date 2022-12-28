@@ -45,12 +45,11 @@ export class DashboardSidemenuComponent implements OnInit {
 
   userRole : any;
   ngOnInit(): void {      
-    let Storage = localStorage.getItem('UserObject');
-    if(Storage){
-      this.userRole = JSON.parse(Storage)
-      this.roleName = JSON.parse(Storage).roleName;
-    }
-
+    // let Storage = localStorage.getItem('UserObject');
+    // if(Storage){
+    //   this.userRole = JSON.parse(Storage)
+    //   this.roleName = JSON.parse(Storage).roleName;
+    // }
   }
 
   logOut(){

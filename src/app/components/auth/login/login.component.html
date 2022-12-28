@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="login-container">
 		<div class="login-form">
-			<form class="login-page" [formGroup]="loginForm" (ngSubmit)="loginUser()" #loginPage = "ngForm">
+			<form class="login-page" [formGroup]="loginForm" (ngSubmit)="loginUser(loginPage)" #loginPage = "ngForm">
 					<h4>Sign In</h4>
 					<div class="username">
 						<label for="">Email Address</label><br>

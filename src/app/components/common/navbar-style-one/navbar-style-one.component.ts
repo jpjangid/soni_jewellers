@@ -31,37 +31,37 @@ export class NavbarStyleOneComponent implements OnInit {
         loginName: this.userFormControl.value.emailAddress,
         loginPassword: this.userFormControl.value.password
       }
-      this._apiService.login(signInObject)
-        .then((res: any) => {
-          console.log(res);
-          if (res.success == false) {
-            this.errorMessage = res.message
-            this.errorMessageCheck = 'danger'
-            setTimeout(() => {
-              this.errorMessage = '',
-                this.errorMessageCheck = ''
-            }, 3000);
-            this.userFormControl.reset();
-            Object.keys(this.userFormControl.controls).forEach(key => {
-              this.userFormControl.controls[key].setErrors(null)
-            });
+      // this._apiService.login(signInObject)
+      //   .then((res: any) => {
+      //     console.log(res);
+      //     if (res.success == false) {
+      //       this.errorMessage = res.message
+      //       this.errorMessageCheck = 'danger'
+      //       setTimeout(() => {
+      //         this.errorMessage = '',
+      //           this.errorMessageCheck = ''
+      //       }, 3000);
+      //       this.userFormControl.reset();
+      //       Object.keys(this.userFormControl.controls).forEach(key => {
+      //         this.userFormControl.controls[key].setErrors(null)
+      //       });
 
-          }
+      //     }
 
-          else {
-            this.route.navigateByUrl('/dashboard');
-            localStorage.setItem('UserObject' , JSON.stringify(res.returnValue))
-          }
-        })
-        .catch((error: any) => {
-          console.log(error);
-          this.errorMessage = 'Please Fill the Form'
-          this.errorMessageCheck = 'danger'
-          setTimeout(() => {
-            this.errorMessage = '',
-              this.errorMessageCheck = ''
-          }, 3000);
-        })
+      //     else {
+      //       this.route.navigateByUrl('/dashboard');
+      //       localStorage.setItem('UserObject' , JSON.stringify(res.returnValue))
+      //     }
+      //   })
+      //   .catch((error: any) => {
+      //     console.log(error);
+      //     this.errorMessage = 'Please Fill the Form'
+      //     this.errorMessageCheck = 'danger'
+      //     setTimeout(() => {
+      //       this.errorMessage = '',
+      //         this.errorMessageCheck = ''
+      //     }, 3000);
+      //   })
     }
 
     else {

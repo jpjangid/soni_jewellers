@@ -101,37 +101,6 @@ export class AppUtility {
     anchor.click();
   }
 
-  async getDropdownData() {
-    let returnData : any = [];
-    let otherCategoryData : any;
-    await this._apiService.dropdowndata('state').then((res: any) => {
-      returnData.push({stateDropdown : res.returnValue});
-    })
-
-    await this._apiService.dropdowndata('paymentTerms').then((res: any) => {
-      returnData.push({paymentDropdown : res.returnValue});
-    })
-
-    await this._apiService.dropdowndata('purpose').then((res: any) => {
-      returnData.push({purposeDropdown : res.returnValue});
-    })
-
-    await this._apiService.dropdowndata('manufacturing').then((res: any) => {
-      returnData.push({manufacturingData : res.returnValue});
-    })
-
-    await this._apiService.dropdowndata('materialconstruction').then((res: any) => {
-      returnData.push({materialofconstructionData : res.returnValue});
-    })
-
-    await this._apiService.dropdowndata('othercategory').then((res: any) => {
-      otherCategoryData = res.returnValue;
-      returnData.push({otherCategoryData : otherCategoryData});
-    })
-
-    return returnData;
-  }
-
   getImageUrl(url : any){
     return `http://103.155.84.143:9072/SupplierOnboarding/`+url;
   }

@@ -45,22 +45,22 @@ export class DashboardMyProfileComponent implements OnInit {
                 "newPassword": md5(this.changePasswordFormControl.value.password)
             }
 
-            this._apiService.changePassword(object)
-            .then((res: any) => {
-                this._utitlity.loader(false);
-                if(res.success == true){
-                    this._apiService.showMessage(res.message , 'success');
-                    this.changePasswordFormControl.reset();
-                    Object.keys(this.changePasswordFormControl.controls).forEach(key => {
-                        this.changePasswordFormControl.controls[key].setErrors(null)
-                      });
-                    form.resetForm();
+            // this._apiService.changePassword(object)
+            // .then((res: any) => {
+            //     this._utitlity.loader(false);
+            //     if(res.success == true){
+            //         this._apiService.showMessage(res.message , 'success');
+            //         this.changePasswordFormControl.reset();
+            //         Object.keys(this.changePasswordFormControl.controls).forEach(key => {
+            //             this.changePasswordFormControl.controls[key].setErrors(null)
+            //           });
+            //         form.resetForm();
 
-                }
-                else{
-                    this._apiService.showMessage(res.message , 'error');
-                }
-            })
+            //     }
+            //     else{
+            //         this._apiService.showMessage(res.message , 'error');
+            //     }
+            // })
         }
     }
 
@@ -70,10 +70,10 @@ export class DashboardMyProfileComponent implements OnInit {
             roleName : this.localStorageObject.roleName,
             loginId : this.localStorageObject.loginId
            }
-            this._apiService.profile(object).then((res:any)=>{
-                console.log(res);         
-                this.supplierProfile = res.returnValue;       
-            })
+            // this._apiService.profile(object).then((res:any)=>{
+            //     console.log(res);         
+            //     this.supplierProfile = res.returnValue;       
+            // })
         }
     }
 
