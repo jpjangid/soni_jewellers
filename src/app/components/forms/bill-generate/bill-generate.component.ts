@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
+import { ApiServiceService } from 'src/app/api-service.service';
 
 @Component({
   selector: 'app-bill-generate',
@@ -13,7 +14,7 @@ export class BillGenerateComponent implements OnInit {
   submitButton: string = 'Submit'
   nextPhase : boolean = false;
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
 
   ngOnInit(): void {
     this.addProduct();
@@ -62,31 +63,40 @@ export class BillGenerateComponent implements OnInit {
     }
   }
 
-  // productList = this.fb.group({
-  //   productId: new FormControl('', [Validators.required]),
-  //   productWeight: new FormControl('', [Validators.required]),
-  //   productQuantity: new FormControl('', [Validators.required]),
-  //   productNetWeight: new FormControl('', [Validators.required])
-  // })
-
   getProductWeight(event , index) {
     let productList = this.productMasterList.filter(res => res.productId == event.target.value);
     let product = this.getProductList();
 
     console.log(productList[0].productWeight);
-    product.controls[index].get('productWeight').setValue(productList[0].productWeight)
-    // this.itemMaster.controls['productWeight'].setValue(productList[0].productWeight)
-    // product.controls.setValue(90)
+    product.controls[index].get('productWt').setValue(productList[0].productWeight);
+    product.controls[index].get('productCode').setValue(productList[0].productName);
     console.log(this.itemMaster.value);
   }
 
   itemMasterSubmit(itemMaster: FormGroupDirective) {
     console.log(this.itemMaster.valid);
-    
     if (this.itemMaster.valid) {
-      let object = this.itemMaster.value;
-      if (this.submitButton == 'Submit') {
+      let array : any = [];
+      let product = this.getProductList();
+      product.value.forEach(element => {
+        array.push({
+          productId : element.productId,
+          productWt : element.productWt,
+          productCode : element.productCode,
+          productQty : element.productQty,
+          netWt : element.netWt
+        })
+      });
+
+      let object = {
+        billNo : itemMaster.value.billNo,
+        generateBillListDetails : array
       }
+
+      this.apiService.billGenerate(object).then((res:any)=>{
+        console.log(res); 
+      })
+
     }
   }
 
@@ -96,9 +106,10 @@ export class BillGenerateComponent implements OnInit {
     if(product.valid){
       product.push(this.fb.group({
         productId: new FormControl('', [Validators.required]),
-        productWeight: new FormControl('', [Validators.required]),
-        productQuantity: new FormControl('', [Validators.required]),
-        productNetWeight: new FormControl('', [Validators.required])
+        productWt: new FormControl('', [Validators.required]),
+        productQty: new FormControl('', [Validators.required]),
+        netWt: new FormControl('', [Validators.required]),
+        productCode: new FormControl('', [Validators.required])
       }))
     }
   }
@@ -109,11 +120,11 @@ export class BillGenerateComponent implements OnInit {
     let netWeight: any;
     let product = this.getProductList();
     console.log(this.itemMaster.value);
-    quantity = this.itemMaster.value.productList[index]['productQuantity'];
-    weight = this.itemMaster.value.productList[index]['productWeight'];
+    quantity = this.itemMaster.value.productList[index]['productQty'];
+    weight = this.itemMaster.value.productList[index]['productWt'];
     netWeight = quantity * weight;
     console.log(netWeight);
-    product.controls[index].get('productNetWeight').setValue(netWeight);
+    product.controls[index].get('netWt').setValue(netWeight);
     this.getTotalWeight();
   }
 
@@ -121,7 +132,7 @@ export class BillGenerateComponent implements OnInit {
     this.totalNetWeight = 0;
     let product = this.getProductList();
     product.value.forEach((res:any)=>{
-      this.totalNetWeight = this.totalNetWeight + res.productNetWeight;
+      this.totalNetWeight = this.totalNetWeight + res.netWt;
     })
   }
 
@@ -139,8 +150,7 @@ export class BillGenerateComponent implements OnInit {
 
   removeProduct(index){
     let product = this.getProductList();
-    const control = <FormArray>this.itemMaster.controls['productList'];
-    control.removeAt(index);
+    product.removeAt(index);
     this.getTotalWeight();
   }
 }
