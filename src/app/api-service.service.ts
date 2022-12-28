@@ -26,4 +26,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
   }
 
+  getAllProductList(endPoint:any) {
+    return this.http.get(this._baseurl+endPoint).toPromise();
+  }
 }

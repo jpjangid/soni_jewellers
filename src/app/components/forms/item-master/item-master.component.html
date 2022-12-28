@@ -33,13 +33,13 @@
                     <div class="invalid-feedback"> Product Name is Required </div>
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
-                    <label>Product Weight(kg)<span class="star_class">*</span></label>
-                    <input type="number" class="form-control" min="1" formControlName="rawPartWeight" maxlength="6" placeholder="Enter Product weight"
-                        [class.is-invalid]="itemForm.submitted &&
+                    <label>Purchasing Price<span class="star_class">*</span></label>
+                    <input type="number" class="form-control" min="1" formControlName="rawPartWeight" maxlength="6"
+                        placeholder="Enter Product weight" [class.is-invalid]="itemForm.submitted &&
                         itemMaster.get('rawPartWeight')?.invalid ||
                         (itemMaster.get('rawPartWeight')?.touched &&
                         itemMaster.get('rawPartWeight')?.invalid)" required>
-                    <div class="invalid-feedback"> Product Weight is Required
+                    <div class="invalid-feedback"> Purchasing Price is Required
                     </div>
                 </div>
                 <div class="add-listings-btn col-lg-4 col-md-6">
@@ -50,6 +50,29 @@
                 </div>
             </div>
         </form>
+
+    </div>
+
+    <div class="add-listings-box1">
+        <div class="breadcrumb-area">
+            <h1 style="border: none;">Product List</h1>
+        </div>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">S. No.</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Purchasing Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of productList;index as index">
+                <th scope="row">{{index+1}}</th>
+                <td>{{item.productCode}}</td>
+                <td>{{item.productWt}}</td>
+              </tr>
+            </tbody>
+          </table>
     </div>
     <!-- End -->
 </div>

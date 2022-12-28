@@ -17,10 +17,12 @@ export class ItemMasterComponent implements OnInit {
   myDate: any;
   loading: boolean = false;
   submitButton: string = 'Submit'
+  productList:any
   constructor(private fb: FormBuilder , private apiService : ApiServiceService , private utility : AppUtility) { }
 
   ngOnInit(): void {
     this.date = new Date();
+    this.getAllProduct();
   }
 
   breadcrumb = [
@@ -52,6 +54,7 @@ export class ItemMasterComponent implements OnInit {
           Object.keys(this.itemMaster.controls).forEach((key:any)=>{
             this.itemMaster.controls[key].setErrors(null);
           })
+          this.getAllProduct()
         }
 
         else{
@@ -59,5 +62,14 @@ export class ItemMasterComponent implements OnInit {
         }
       })
     }
+  }
+
+  async getAllProduct() {
+    this.utility.loader(true);
+    await this.apiService.getAllProductList('Product').then((res:any)=> {
+      console.log(res);
+      this.utility.loader(false);
+      this.productList = res.returnValue;
+    })
   }
 }
