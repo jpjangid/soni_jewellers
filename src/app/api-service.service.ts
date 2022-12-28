@@ -33,4 +33,8 @@ export class ApiServiceService {
   getAllProductList(endPoint:any) {
     return this.http.get(this._baseurl+endPoint).toPromise();
   }
+
+  deleteProduct(endPoint:any) {
+    return this.http.delete(this._baseurl + endPoint).toPromise();
+  }
 }

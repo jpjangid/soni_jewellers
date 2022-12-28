@@ -72,4 +72,16 @@ export class ItemMasterComponent implements OnInit {
       this.productList = res.returnValue;
     })
   }
+
+  async onClick(string:any, index:any, id:any) {
+    if(string == 'edit') {
+      this.itemMaster.controls['productCode'].setValue(this.productList[index].productCode);
+      this.itemMaster.controls['productWt'].setValue(this.productList[index].productWt);
+    }
+    else {
+      await this.apiService.deleteProduct('Product/'+id).then((res:any) => {
+        console.log(res);
+      })
+    }
+  }
 }
