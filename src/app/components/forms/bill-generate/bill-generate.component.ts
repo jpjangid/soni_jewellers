@@ -76,6 +76,7 @@ export class BillGenerateComponent implements OnInit {
   itemMasterSubmit(itemMaster: FormGroupDirective) {
     console.log(this.itemMaster.valid);
     if (this.itemMaster.valid) {
+      this.nextPhase = !this.nextPhase
       let array : any = [];
       let product = this.getProductList();
       product.value.forEach(element => {

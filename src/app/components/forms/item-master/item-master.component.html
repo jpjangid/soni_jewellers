@@ -34,8 +34,8 @@
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>Purchasing Price<span class="star_class">*</span></label>
-                    <input type="number" class="form-control" min="1" formControlName="rawPartWeight" maxlength="6"
-                        placeholder="Enter Product weight" [class.is-invalid]="itemForm.submitted &&
+                    <input type="number" class="form-control" min="0" formControlName="rawPartWeight" maxlength="6"
+                        placeholder="Enter Purchasing Price" [class.is-invalid]="itemForm.submitted &&
                         itemMaster.get('rawPartWeight')?.invalid ||
                         (itemMaster.get('rawPartWeight')?.touched &&
                         itemMaster.get('rawPartWeight')?.invalid)" required>
