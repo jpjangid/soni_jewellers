@@ -11,6 +11,8 @@ export class BillGenerateComponent implements OnInit {
   myDate: any;
   loading: boolean = false;
   submitButton: string = 'Submit'
+  nextPhase : boolean = false;
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -43,6 +45,23 @@ export class BillGenerateComponent implements OnInit {
     productList : this.fb.array([])
   })
 
+  registerMaster = this.fb.group({
+    name : new FormControl('' , [Validators.required]),
+    fname : new FormControl('' , [Validators.required]),
+    sname : new FormControl('' , [Validators.required]),
+    cname : new FormControl('' , [Validators.required]),
+    otp : new FormControl('' , [Validators.required]),
+    mobileNo : new FormControl('' , [Validators.required]),
+    aadharNo : new FormControl('' , [Validators.required , Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
+    panNo : new FormControl('' , [Validators.required , Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
+  })
+
+  registerMasterSubmit(register : FormGroupDirective){
+    if(this.registerMaster.valid){
+      this.nextPhase = !this.nextPhase;
+    }
+  }
+
   // productList = this.fb.group({
   //   productId: new FormControl('', [Validators.required]),
   //   productWeight: new FormControl('', [Validators.required]),
@@ -72,7 +91,6 @@ export class BillGenerateComponent implements OnInit {
   }
 
   addProduct(){
-    this.totalNetWeight  = 0;
     let product = this.getProductList();
     console.log(product.valid , product);    
     if(product.valid){
@@ -83,9 +101,6 @@ export class BillGenerateComponent implements OnInit {
         productNetWeight: new FormControl('', [Validators.required])
       }))
     }
-    product.value.forEach((res:any)=>{
-      this.totalNetWeight = this.totalNetWeight + res.productNetWeight;
-    })
   }
 
   getNetWeight(index) {
@@ -98,7 +113,16 @@ export class BillGenerateComponent implements OnInit {
     weight = this.itemMaster.value.productList[index]['productWeight'];
     netWeight = quantity * weight;
     console.log(netWeight);
-    product.controls[index].get('productNetWeight').setValue(netWeight)
+    product.controls[index].get('productNetWeight').setValue(netWeight);
+    this.getTotalWeight();
+  }
+
+  getTotalWeight(){
+    this.totalNetWeight = 0;
+    let product = this.getProductList();
+    product.value.forEach((res:any)=>{
+      this.totalNetWeight = this.totalNetWeight + res.productNetWeight;
+    })
   }
 
 
@@ -108,34 +132,15 @@ export class BillGenerateComponent implements OnInit {
 
   // productList: any = [];
   totalNetWeight: any = 0;
-  saveProduct() {
-    // if (this.itemMaster.valid) {
-    //   let total: number = 0;
-    //   this.productList.push(this.itemMaster.value);
-    //   this.itemMaster.controls['productId'].setValue('')
-    //   this.itemMaster.controls['productNetWeight'].setValue('')
-    //   this.itemMaster.controls['productQuantity'].setValue('')
-    //   this.itemMaster.controls['productWeight'].setValue('')
-
-    //   this.productList.forEach(element => {
-    //     total = element.productNetWeight
-    //   });
-
-    //   this.totalNetWeight = total + this.totalNetWeight;
-    //   console.log('totalNetWeight', this.totalNetWeight);
-    // }
-
-    // else{
-      
-    // }
+  showOtp : any;
+  getOtp(){
+    this.showOtp = true;
   }
 
   removeProduct(index){
     let product = this.getProductList();
-    // product.removeAt(index);
-    this.itemMaster.controls['productList'].removeAt(index);
-    // product.value.splice(index);
-    console.log(index , product , product.value);    
-    this.addProduct();
+    const control = <FormArray>this.itemMaster.controls['productList'];
+    control.removeAt(index);
+    this.getTotalWeight();
   }
 }

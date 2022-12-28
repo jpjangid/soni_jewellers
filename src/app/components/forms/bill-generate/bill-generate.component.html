@@ -18,7 +18,7 @@
 
     <!-- Start -->
     <form [formGroup]="itemMaster" (ngSubmit)="itemMasterSubmit(itemForm)"
-        #itemForm="ngForm">
+        #itemForm="ngForm" *ngIf="!nextPhase">
         <div class="add-listings-box1">
             <div class="row">
                 <div class="col-lg-3 col-md-12 form-group">
@@ -100,14 +100,124 @@
                 </div>
             </ng-container>
 
-            {{totalNetWeight}}
-
             <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
-                <button class="submit_btn">Next</button>
+                <button class="submit_btn" type="submit" (click)="nextPhase = !nextPhase">Next</button>
             </div>
         </div>
 
         <!-- End -->
     </form>
     <!-- End -->
+
+    <div class="add-listings-box1" *ngIf="nextPhase">
+        <form [formGroup]="registerMaster" (ngSubmit)="registerMasterSubmit(register)" #register="ngForm">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Name<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="name"
+                        placeholder="Enter your name"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('name')?.invalid ||
+                        (registerMaster.get('name')?.touched &&
+                        registerMaster.get('name')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> Name is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Father Name<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="fname"
+                        placeholder="Enter father name"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('fname')?.invalid ||
+                        (registerMaster.get('fname')?.touched &&
+                        registerMaster.get('fname')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> Father Name is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Shop Name<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="sname"
+                        placeholder="Enter shop name"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('sname')?.invalid ||
+                        (registerMaster.get('sname')?.touched &&
+                        registerMaster.get('sname')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> Shop Name is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>City<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="cname"
+                        placeholder="Enter City"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('cname')?.invalid ||
+                        (registerMaster.get('cname')?.touched &&
+                        registerMaster.get('cname')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> City is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Mobile Number<span class="star_class">*</span></label>
+                    <input type="text" class="form-control" minlength="10"
+                        formControlName="mobileNo" maxlength="10" (blur)="getOtp()"
+                        placeholder="Enter your Mobile Number"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('mobileNo')?.invalid ||
+                        (registerMaster.get('mobileNo')?.touched &&
+                        registerMaster.get('mobileNo')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> Mobile Number is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group" *ngIf="showOtp">
+                    <label>OTP<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="otp"
+                        placeholder="Enter OTP"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('otp')?.invalid ||
+                        (registerMaster.get('otp')?.touched &&
+                        registerMaster.get('otp')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> OTP is Required</div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Aadhar Number<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="aadharNo"
+                        placeholder="Enter Aadhar Number"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('aadharNo')?.invalid ||
+                        (registerMaster.get('aadharNo')?.touched &&
+                        registerMaster.get('aadharNo')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> Aadhar Number is Required</div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>PAN<span class="star_class">*</span></label>
+                    <input type="text" class="form-control"
+                        formControlName="panNo"
+                        placeholder="Enter PAN"
+                        [class.is-invalid]="register.submitted &&
+                        registerMaster.get('panNo')?.invalid ||
+                        (registerMaster.get('panNo')?.touched &&
+                        registerMaster.get('panNo')?.invalid)"
+                        required>
+                    <div class="invalid-feedback"> PAN is Required </div>
+                </div>
+    
+                <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
+                    <button class="submit_btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
