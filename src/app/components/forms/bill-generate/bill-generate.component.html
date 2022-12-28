@@ -55,20 +55,20 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Product Weight<span class="star_class">*</span></label>
-                        <span class="form-control">{{form.value.productWeight ?
-                            form.value.productWeight : 'Enter Product Weight'}}</span>
+                        <label>Product Purchasing Price<span class="star_class">*</span></label>
+                        <span class="form-control">{{form.value.productWt ?
+                            form.value.productWt : 'Enter Product Purchasing Price'}}</span>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Product Quantity<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="1"
-                            formControlName="productQuantity"
+                            formControlName="productQty"
                             placeholder="Enter Product weight"
                             (input)="getNetWeight(index)"
                             [class.is-invalid]="itemForm.submitted &&
-                            itemMaster.get('productQuantity')?.invalid ||
-                            (itemMaster.get('productQuantity')?.touched &&
-                            itemMaster.get('productQuantity')?.invalid)"
+                            itemMaster.get('productQty')?.invalid ||
+                            (itemMaster.get('productQty')?.touched &&
+                            itemMaster.get('productQty')?.invalid)"
                             required>
                         <div class="invalid-feedback"> Product Quantity is
                             Required
@@ -76,8 +76,8 @@
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Product Net Weight<span class="star_class">*</span></label>
-                        <span class="form-control">{{form.value.productNetWeight
-                            ? (form.value.productNetWeight | number:'0.1-2') :
+                        <span class="form-control">{{form.value.netWt
+                            ? (form.value.netWt | number:'0.1-2') :
                             'Enter Product Net Weight'}}</span>
 
                     </div>
@@ -101,7 +101,7 @@
             </ng-container>
 
             <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
-                <button class="submit_btn" type="submit" (click)="nextPhase = !nextPhase">Next</button>
+                <button class="submit_btn" type="submit">Next</button>
             </div>
         </div>
 

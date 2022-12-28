@@ -25,6 +25,10 @@ export class ApiServiceService {
   login(object):Promise<any>{
     return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
   }
+  
+  billGenerate(object:any){
+    return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()
+  }
 
   getAllProductList(endPoint:any) {
     return this.http.get(this._baseurl+endPoint).toPromise();
