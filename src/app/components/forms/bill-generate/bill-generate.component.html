@@ -45,8 +45,7 @@
                         <label for="status">{{index+1}}. Product Name<span
                                 class="star_class">*</span></label>
                         <select name="" id="" class="form-control form-select"
-                            formControlName="productId"
-                            (change)="getProductWeight($event , index)">
+                            formControlName="productId" (change)="getProductWeight($event , index)">
                             <option value="" disabled>Select Product Name</option>
                             <ng-container *ngFor="let product of
                                 productMasterList">
@@ -57,33 +56,30 @@
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Weight<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="1"
-                            formControlName="productQty"
+                            formControlName="weight"
                             placeholder="Enter Product weight"
-                            (input)="getNetWeight(index)"
+                            (input)="getNetWeight(index)" 
                             [class.is-invalid]="itemForm.submitted &&
-                            itemMaster.get('productQty')?.invalid ||
-                            (itemMaster.get('productQty')?.touched &&
-                            itemMaster.get('productQty')?.invalid)"
+                            itemMaster.get('weight')?.invalid ||
+                            (itemMaster.get('weight')?.touched &&
+                            itemMaster.get('weight')?.invalid)"
                             required>
-                        <div class="invalid-feedback"> Product Quantity is
-                            Required
+                        <div class="invalid-feedback"> Product Quantity is Required
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Tanch<span class="star_class">*</span></label>
-                        <input type="number" class="form-control" min="1"
-                            formControlName="productWt"
-                            placeholder="Enter Tanch"
+                        <input type="number" class="form-control" min="0"
+                            formControlName="tanchOt"
+                            placeholder="Enter Tanch" (input)="getNetWeight(index)" 
                             [class.is-invalid]="itemForm.submitted &&
-                            itemMaster.get('productWt')?.invalid ||
-                            (itemMaster.get('productWt')?.touched &&
-                            itemMaster.get('productWt')?.invalid)"
+                            itemMaster.get('tanchOt')?.invalid ||
+                            (itemMaster.get('tanchOt')?.touched &&
+                            itemMaster.get('tanchOt')?.invalid)"
                             required>
                         <div class="invalid-feedback"> Tanch is
                             Required
                         </div>
-                            <!-- <span class="form-control">{{form.value.productWt ?
-                                form.value.productWt : 'Enter Product Purchasing Price'}}</span> -->
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Total Fine<span class="star_class">*</span></label>
@@ -232,3 +228,8 @@
         </form>
     </div>
 </div>
+
+
+
+
+<!-- (change)="getProductWeight($event , index)"  -->

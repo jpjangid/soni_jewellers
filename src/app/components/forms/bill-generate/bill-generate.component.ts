@@ -66,11 +66,7 @@ export class BillGenerateComponent implements OnInit {
   getProductWeight(event , index) {
     let productList = this.productMasterList.filter(res => res.productId == event.target.value);
     let product = this.getProductList();
-
-    console.log(productList[0].productWeight);
-    product.controls[index].get('productWt').setValue(productList[0].productWeight);
-    product.controls[index].get('productCode').setValue(productList[0].productName);
-    console.log(this.itemMaster.value);
+    product.controls[index].get('tanchIn').setValue(productList[0].productWeight);
   }
 
   itemMasterSubmit(itemMaster: FormGroupDirective) {
@@ -107,34 +103,45 @@ export class BillGenerateComponent implements OnInit {
     if(product.valid){
       product.push(this.fb.group({
         productId: new FormControl('', [Validators.required]),
-        productWt: new FormControl('', [Validators.required]),
-        productQty: new FormControl('', [Validators.required]),
+        tanchOt: new FormControl('', [Validators.required]),
+        weight: new FormControl('', [Validators.required]),
+        tanchIn: new FormControl('', [Validators.required]),
         netWt: new FormControl('', [Validators.required]),
-        productCode: new FormControl('', [Validators.required])
+        profit: new FormControl('', [Validators.required])
       }))
     }
   }
 
   getNetWeight(index) {
-    let quantity: any;
+    let tanchIn: any;
+    let tanchOt: any;
     let weight: any;
-    let netWeight: any;
     let product = this.getProductList();
-    console.log(this.itemMaster.value);
-    quantity = this.itemMaster.value.productList[index]['productQty'];
-    weight = this.itemMaster.value.productList[index]['productWt'];
-    netWeight = quantity * weight;
-    console.log(netWeight);
-    product.controls[index].get('netWt').setValue(netWeight);
-    this.getTotalWeight();
+    let profit : any = 0;
+    tanchIn = this.itemMaster.value.productList[index]['tanchIn'];
+    tanchOt = this.itemMaster.value.productList[index]['tanchOt'];
+    weight = this.itemMaster.value.productList[index]['weight'];
+    if(tanchOt && weight){
+      let netWeight = tanchOt * weight;
+      console.log(netWeight);
+      product.controls[index].get('netWt').setValue(netWeight);
+      profit = ((tanchOt * weight) - (tanchIn * weight)) / 10;
+      console.log((tanchIn * weight) , (tanchOt * weight) , product.value , profit);
+      product.controls[index].get('profit').setValue(profit);
+      this.getTotalWeight();
+    }
+
+    
   }
 
   getTotalWeight(){
     this.totalNetWeight = 0;
     let product = this.getProductList();
     product.value.forEach((res:any)=>{
-      this.totalNetWeight = this.totalNetWeight + res.netWt;
+      this.totalNetWeight = this.totalNetWeight + res.profit;
     })
+
+    console.log(this.totalNetWeight);
   }
 
 
