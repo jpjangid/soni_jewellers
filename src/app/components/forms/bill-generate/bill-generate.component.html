@@ -55,12 +55,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Purchasing Price<span class="star_class">*</span></label>
-                        <span class="form-control">{{form.value.productWt ?
-                            form.value.productWt : 'Enter Purchasing Price'}}</span>
-                    </div>
-                    <div class="col-lg-3 col-md-12 form-group">
-                        <label>Product Quantity<span class="star_class">*</span></label>
+                        <label>Weight<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="1"
                             formControlName="productQty"
                             placeholder="Enter Product weight"
@@ -75,7 +70,23 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Product Net Weight<span class="star_class">*</span></label>
+                        <label>Tanch<span class="star_class">*</span></label>
+                        <input type="number" class="form-control" min="1"
+                            formControlName="productWt"
+                            placeholder="Enter Tanch"
+                            [class.is-invalid]="itemForm.submitted &&
+                            itemMaster.get('productWt')?.invalid ||
+                            (itemMaster.get('productWt')?.touched &&
+                            itemMaster.get('productWt')?.invalid)"
+                            required>
+                        <div class="invalid-feedback"> Tanch is
+                            Required
+                        </div>
+                            <!-- <span class="form-control">{{form.value.productWt ?
+                                form.value.productWt : 'Enter Product Purchasing Price'}}</span> -->
+                    </div>
+                    <div class="col-lg-3 col-md-12 form-group">
+                        <label>Total Fine<span class="star_class">*</span></label>
                         <span class="form-control">{{form.value.netWt
                             ? (form.value.netWt | number:'0.1-2') :
                             'Enter Product Net Weight'}}</span>
