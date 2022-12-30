@@ -53,8 +53,8 @@ export class BillGenerateComponent implements OnInit {
     cname : new FormControl('' , [Validators.required]),
     otp : new FormControl('' , [Validators.required]),
     mobileNo : new FormControl('' , [Validators.required]),
-    aadharNo : new FormControl('' , [Validators.required , Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
-    panNo : new FormControl('' , [Validators.required , Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
+    aadharNo : new FormControl('' , [Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
+    panNo : new FormControl('' , [Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
   })
 
   registerMasterSubmit(register : FormGroupDirective){
@@ -72,7 +72,7 @@ export class BillGenerateComponent implements OnInit {
   itemMasterSubmit(itemMaster: FormGroupDirective) {
     console.log(this.itemMaster.valid);
     if (this.itemMaster.valid) {
-      this.nextPhase = !this.nextPhase
+      this.nextPhase = !this.nextPhase;
       let array : any = [];
       let product = this.getProductList();
       product.value.forEach(element => {
@@ -99,7 +99,6 @@ export class BillGenerateComponent implements OnInit {
 
   addProduct(){
     let product = this.getProductList();
-    console.log(product.valid , product);    
     if(product.valid){
       product.push(this.fb.group({
         productId: new FormControl('', [Validators.required]),
@@ -123,10 +122,8 @@ export class BillGenerateComponent implements OnInit {
     weight = this.itemMaster.value.productList[index]['weight'];
     if(tanchOt && weight){
       let netWeight = tanchOt * weight;
-      console.log(netWeight);
       product.controls[index].get('netWt').setValue(netWeight);
-      profit = ((tanchOt * weight) - (tanchIn * weight)) / 10;
-      console.log((tanchIn * weight) , (tanchOt * weight) , product.value , profit);
+      profit = ((tanchOt * weight) - (tanchIn * weight));
       product.controls[index].get('profit').setValue(profit);
       this.getTotalWeight();
     }
@@ -141,7 +138,7 @@ export class BillGenerateComponent implements OnInit {
       this.totalNetWeight = this.totalNetWeight + res.profit;
     })
 
-    console.log(this.totalNetWeight);
+    this.totalNetWeight = this.totalNetWeight * 10;
   }
 
 

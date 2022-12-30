@@ -36,8 +36,10 @@
 
         <!-- Start -->
         <div class="add-listings-box1" formArrayName="productList">
-            <p-progressBar [style]="{'height': '20px'}"
-                        [value]="totalNetWeight" [showValue]="false"></p-progressBar>
+            <div style="width: 100%; text-align: right;">
+                <span><b>{{totalNetWeight < 100 ? totalNetWeight : 100}}%</b></span>
+            </div>
+            <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
             <ng-container *ngFor="let form of getProductList().controls; index
                 as index; last as last">
                 <div class="row" [formGroupName]="index">
@@ -54,7 +56,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Weight<span class="star_class">*</span></label>
+                        <label>Weight (gm)<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="1"
                             formControlName="weight"
                             placeholder="Enter Product weight"
@@ -64,7 +66,7 @@
                             (itemMaster.get('weight')?.touched &&
                             itemMaster.get('weight')?.invalid)"
                             required>
-                        <div class="invalid-feedback"> Product Quantity is Required
+                        <div class="invalid-feedback"> Product Weight is Required
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
@@ -200,25 +202,13 @@
                     <label>Aadhar Number<span class="star_class">*</span></label>
                     <input type="text" class="form-control"
                         formControlName="aadharNo"
-                        placeholder="Enter Aadhar Number"
-                        [class.is-invalid]="register.submitted &&
-                        registerMaster.get('aadharNo')?.invalid ||
-                        (registerMaster.get('aadharNo')?.touched &&
-                        registerMaster.get('aadharNo')?.invalid)"
-                        required>
-                    <div class="invalid-feedback"> Aadhar Number is Required</div>
+                        placeholder="Enter Aadhar Number">
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>PAN<span class="star_class">*</span></label>
                     <input type="text" class="form-control"
                         formControlName="panNo"
-                        placeholder="Enter PAN"
-                        [class.is-invalid]="register.submitted &&
-                        registerMaster.get('panNo')?.invalid ||
-                        (registerMaster.get('panNo')?.touched &&
-                        registerMaster.get('panNo')?.invalid)"
-                        required>
-                    <div class="invalid-feedback"> PAN is Required </div>
+                        placeholder="Enter PAN">
                 </div>
     
                 <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">

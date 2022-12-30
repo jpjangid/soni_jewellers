@@ -21,6 +21,14 @@ export class ApiServiceService {
   postProduct(object):Promise<any>{
     return this.http.post(this._baseurl + 'Product' , object).toPromise()
   }
+  
+  putProduct(object):Promise<any>{
+    return this.http.put(this._baseurl + 'Product' , object).toPromise()
+  }
+
+  getProducts():Promise<any>{
+    return this.http.get(this._baseurl + 'Product').toPromise()
+  }
 
   login(object):Promise<any>{
     return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
