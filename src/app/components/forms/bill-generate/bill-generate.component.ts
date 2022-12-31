@@ -53,8 +53,8 @@ export class BillGenerateComponent implements OnInit {
     cname : new FormControl('' , [Validators.required]),
     otp : new FormControl('' , [Validators.required]),
     mobileNo : new FormControl('' , [Validators.required]),
-    aadharNo : new FormControl('' , [Validators.required , Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
-    panNo : new FormControl('' , [Validators.required , Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
+    aadharNo : new FormControl('' , [Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
+    panNo : new FormControl('' , [Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
   })
 
   registerMasterSubmit(register : FormGroupDirective){
@@ -66,16 +66,13 @@ export class BillGenerateComponent implements OnInit {
   getProductWeight(event , index) {
     let productList = this.productMasterList.filter(res => res.productId == event.target.value);
     let product = this.getProductList();
-
-    console.log(productList[0].productWeight);
-    product.controls[index].get('productWt').setValue(productList[0].productWeight);
-    product.controls[index].get('productCode').setValue(productList[0].productName);
-    console.log(this.itemMaster.value);
+    product.controls[index].get('tanchIn').setValue(productList[0].productWeight);
   }
 
   itemMasterSubmit(itemMaster: FormGroupDirective) {
     console.log(this.itemMaster.valid);
     if (this.itemMaster.valid) {
+      this.nextPhase = !this.nextPhase;
       let array : any = [];
       let product = this.getProductList();
       product.value.forEach(element => {
@@ -102,38 +99,46 @@ export class BillGenerateComponent implements OnInit {
 
   addProduct(){
     let product = this.getProductList();
-    console.log(product.valid , product);    
     if(product.valid){
       product.push(this.fb.group({
         productId: new FormControl('', [Validators.required]),
-        productWt: new FormControl('', [Validators.required]),
-        productQty: new FormControl('', [Validators.required]),
+        tanchOt: new FormControl('', [Validators.required]),
+        weight: new FormControl('', [Validators.required]),
+        tanchIn: new FormControl('', [Validators.required]),
         netWt: new FormControl('', [Validators.required]),
-        productCode: new FormControl('', [Validators.required])
+        profit: new FormControl('', [Validators.required])
       }))
     }
   }
 
   getNetWeight(index) {
-    let quantity: any;
+    let tanchIn: any;
+    let tanchOt: any;
     let weight: any;
-    let netWeight: any;
     let product = this.getProductList();
-    console.log(this.itemMaster.value);
-    quantity = this.itemMaster.value.productList[index]['productQty'];
-    weight = this.itemMaster.value.productList[index]['productWt'];
-    netWeight = quantity * weight;
-    console.log(netWeight);
-    product.controls[index].get('netWt').setValue(netWeight);
-    this.getTotalWeight();
+    let profit : any = 0;
+    tanchIn = this.itemMaster.value.productList[index]['tanchIn'];
+    tanchOt = this.itemMaster.value.productList[index]['tanchOt'];
+    weight = this.itemMaster.value.productList[index]['weight'];
+    if(tanchOt && weight){
+      let netWeight = tanchOt * weight;
+      product.controls[index].get('netWt').setValue(netWeight);
+      profit = ((tanchOt * weight) - (tanchIn * weight));
+      product.controls[index].get('profit').setValue(profit);
+      this.getTotalWeight();
+    }
+
+    
   }
 
   getTotalWeight(){
     this.totalNetWeight = 0;
     let product = this.getProductList();
     product.value.forEach((res:any)=>{
-      this.totalNetWeight = this.totalNetWeight + res.netWt;
+      this.totalNetWeight = this.totalNetWeight + res.profit;
     })
+
+    this.totalNetWeight = this.totalNetWeight * 10;
   }
 
 

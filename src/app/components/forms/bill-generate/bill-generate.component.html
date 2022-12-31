@@ -34,14 +34,18 @@
 
         <!-- Start -->
         <div class="add-listings-box1" formArrayName="productList">
+            <div style="width: 100%; text-align: right;">
+                <span><b>{{totalNetWeight < 100 ? totalNetWeight : 100}}%</b></span>
+            </div>
             <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
             <ng-container *ngFor="let form of getProductList().controls; index
                 as index; last as last">
                 <div class="row" [formGroupName]="index">
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label for="status">{{index+1}}. Product Name<span class="star_class">*</span></label>
-                        <select name="" id="" class="form-control form-select" formControlName="productId"
-                            (change)="getProductWeight($event , index)">
+                        <label for="status">{{index+1}}. Product Name<span
+                                class="star_class">*</span></label>
+                        <select name="" id="" class="form-control form-select"
+                            formControlName="productId" (change)="getProductWeight($event , index)">
                             <option value="" disabled>Select Product Name</option>
                             <ng-container *ngFor="let product of
                                 productMasterList">
@@ -50,29 +54,32 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Weight<span class="star_class">*</span></label>
-                        <input type="number" class="form-control" min="1" formControlName="productQty"
-                            placeholder="Enter Product weight" (input)="getNetWeight(index)" [class.is-invalid]="itemForm.submitted &&
-                            itemMaster.get('productQty')?.invalid ||
-                            (itemMaster.get('productQty')?.touched &&
-                            itemMaster.get('productQty')?.invalid)" required>
-                        <div class="invalid-feedback"> Product Quantity is
-                            Required
+                        <label>Weight (gm)<span class="star_class">*</span></label>
+                        <input type="number" class="form-control" min="1"
+                            formControlName="weight"
+                            placeholder="Enter Product weight"
+                            (input)="getNetWeight(index)" 
+                            [class.is-invalid]="itemForm.submitted &&
+                            itemMaster.get('weight')?.invalid ||
+                            (itemMaster.get('weight')?.touched &&
+                            itemMaster.get('weight')?.invalid)"
+                            required>
+                        <div class="invalid-feedback"> Product Weight is Required
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Tanch<span class="star_class">*</span></label>
-                        <input type="number" class="form-control" min="1" formControlName="productWt"
-                            placeholder="Enter Tanch" [class.is-invalid]="itemForm.submitted &&
-                            itemMaster.get('productWt')?.invalid ||
-                            (itemMaster.get('productWt')?.touched &&
-                            itemMaster.get('productWt')?.invalid)" required>
+                        <input type="number" class="form-control" min="0"
+                            formControlName="tanchOt"
+                            placeholder="Enter Tanch" (input)="getNetWeight(index)" 
+                            [class.is-invalid]="itemForm.submitted &&
+                            itemMaster.get('tanchOt')?.invalid ||
+                            (itemMaster.get('tanchOt')?.touched &&
+                            itemMaster.get('tanchOt')?.invalid)"
+                            required>
                         <div class="invalid-feedback"> Tanch is
                             Required
                         </div>
-
-                        <!-- <span class="form-control">{{form.value.productWt ?
-                                form.value.productWt : 'Enter Product Purchasing Price'}}</span> -->
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Total Fine<span class="star_class">*</span></label>
@@ -82,7 +89,8 @@
 
                     </div>
                     <div class="add-listings-btn">
-                        <div class="col-lg-12 form-group d-flex" style="margin-top: 0!important;">
+                        <div class="col-lg-12 form-group d-flex"
+                            style="margin-top: 0!imWSportant;">
                             <div class="col-lg-4 p-0">
                                 <button type="button" class="submit_btn" *ngIf="last" (click)="addProduct()" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">+</button>
@@ -168,21 +176,15 @@
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>Aadhar Number<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" formControlName="aadharNo" placeholder="Enter Aadhar Number"
-                        [class.is-invalid]="register.submitted &&
-                        registerMaster.get('aadharNo')?.invalid ||
-                        (registerMaster.get('aadharNo')?.touched &&
-                        registerMaster.get('aadharNo')?.invalid)" required>
-                    <div class="invalid-feedback"> Aadhar Number is Required</div>
+                    <input type="text" class="form-control"
+                        formControlName="aadharNo"
+                        placeholder="Enter Aadhar Number">
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>PAN<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" formControlName="panNo" placeholder="Enter PAN"
-                        [class.is-invalid]="register.submitted &&
-                        registerMaster.get('panNo')?.invalid ||
-                        (registerMaster.get('panNo')?.touched &&
-                        registerMaster.get('panNo')?.invalid)" required>
-                    <div class="invalid-feedback"> PAN is Required </div>
+                    <input type="text" class="form-control"
+                        formControlName="panNo"
+                        placeholder="Enter PAN">
                 </div>
 
                 <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
@@ -192,3 +194,8 @@
         </form>
     </div>
 </div>
+
+
+
+
+<!-- (change)="getProductWeight($event , index)"  -->

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.utility.loader(true);
       let object = {
-        loginName : 'admin' , 
+        loginName : this.loginForm.value.loginUser, 
         loginPassword : this.loginForm.value.loginPassword
       }
       this.apiService.login(object).then((res:any)=>{
