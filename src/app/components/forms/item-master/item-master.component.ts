@@ -36,7 +36,8 @@ export class ItemMasterComponent implements OnInit {
 
   itemMaster = this.fb.group({
     itemCode: new FormControl('', [Validators.required]),
-    rawPartWeight: new FormControl('', [Validators.required])
+    rawPartWeight: new FormControl('', [Validators.required]),
+    stock: new FormControl('', [Validators.required])
   })
 
   itemMasterSubmit(itemMaster: FormGroupDirective) {
@@ -46,7 +47,8 @@ export class ItemMasterComponent implements OnInit {
       if(this.submitButton == 'Submit'){
         let object = {
           productCode : this.itemMaster.value.itemCode, 
-          productWt : this.itemMaster.value.rawPartWeight     
+          productWt : this.itemMaster.value.rawPartWeight,     
+          stock : this.itemMaster.value.stock     
         }
   
         this.apiService.postProduct(object).then((res:any)=>{
@@ -71,6 +73,7 @@ export class ItemMasterComponent implements OnInit {
         let object = {
           productCode : this.itemMaster.value.itemCode, 
           productWt : this.itemMaster.value.rawPartWeight,
+          stock : this.itemMaster.value.stock,
           productId : this.editProductId   
         }
   
@@ -120,6 +123,7 @@ export class ItemMasterComponent implements OnInit {
       this.editProductId = product.productId;
       this.itemMaster.controls['itemCode'].setValue(product.productCode);
       this.itemMaster.controls['rawPartWeight'].setValue(product.productWt);
+      this.itemMaster.controls['stock'].setValue(product.stock);
       this.submitButton = 'Update';
     }
     else {

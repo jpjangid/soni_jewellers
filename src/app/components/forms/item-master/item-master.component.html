@@ -23,7 +23,7 @@
         <!-- End -->
         <form [formGroup]="itemMaster" (ngSubmit)="itemMasterSubmit(itemForm)" #itemForm="ngForm">
             <div class="row">
-                <div class="col-lg-3 col-md-12 form-group">
+                <div class="col-lg-4 col-md-12 form-group">
                     <label for="status">Product Name<span class="star_class">*</span></label>
                     <input type="text" class="form-control" formControlName="itemCode" placeholder="Enter Product Name"
                         [class.is-invalid]="(itemForm.submitted &&
@@ -32,7 +32,7 @@
                         itemMaster.get('itemCode')?.invalid)" required>
                     <div class="invalid-feedback"> Product Name is Required </div>
                 </div>
-                <div class="col-lg-3 col-md-12 form-group">
+                <div class="col-lg-4 col-md-12 form-group">
                     <label>Purchasing Price<span class="star_class">*</span></label>
                     <input type="number" class="form-control" min="0" formControlName="rawPartWeight" maxlength="6"
                         placeholder="Enter Purchasing Price" [class.is-invalid]="itemForm.submitted &&
@@ -42,10 +42,20 @@
                     <div class="invalid-feedback"> Purchasing Price is Required
                     </div>
                 </div>
-                <div class="add-listings-btn col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-12 form-group">
+                    <label>Stock<span class="star_class">*</span></label>
+                    <input type="number" class="form-control" min="0" formControlName="stock" maxlength="6"
+                        placeholder="Enter Product Stock" [class.is-invalid]="itemForm.submitted &&
+                        itemMaster.get('stock')?.invalid ||
+                        (itemMaster.get('stock')?.touched &&
+                        itemMaster.get('stock')?.invalid)" required>
+                    <div class="invalid-feedback"> Product Stock is Required
+                    </div>
+                </div>
+                <div class="add-listings-btn col-lg-12 col-md-12">
                     <div class="form-group">
-                        <button type="submit" class="submit_btn">{{submitButton}}</button>
-                        <button type="reset" class="mx-3 reset_btn">Reset</button>
+                        <button type="submit" class="submit_btn m-0">{{submitButton}}</button>
+                        <button type="reset" class="mx-3 reset_btn my-0">Reset</button>
                     </div>
                 </div>
             </div>
@@ -63,6 +73,7 @@
                 <th scope="col">S. No.</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Purchasing Price</th>
+                <th scope="col">Product Stock</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -71,6 +82,7 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.productCode}}</td>
                 <td>{{item.productWt}}</td>
+                <td>{{item.stock}}</td>
                 <td>
                     <div class="d-flex align-items-center">
                         <i class="pi pi-pencil mr-3" style="cursor: pointer;" pTooltip="Edit" (click)="onClick('edit', index, item)"></i>
