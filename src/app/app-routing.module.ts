@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardGuard } from './AuthGuards/auth-guard.guard';
 import { LoginComponent } from './components/auth/login/login.component';
+import { RegisteredUserComponent } from './components/common/registered-user/registered-user.component';
 import { BillGenerateComponent } from './components/forms/bill-generate/bill-generate.component';
 import { ItemMasterComponent } from './components/forms/item-master/item-master.component';
 // import { CostBreakerComponent } from './components/custom/admin-components/cost-breaker/cost-breakup.component';
@@ -63,6 +64,7 @@ const routes: Routes = [
     // {path: 'register/:email', component: UserAccountComponent , pathMatch: 'full'},
     // {path: 'reset-password', component: ResetAccountInfoComponent , pathMatch: 'full'},
     {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
+    {path: 'registered-user', component: RegisteredUserComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
     {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full', canActivate : [AuthGuardGuard], data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'verification', component: VerificationFormComponent , pathMatch: 'full'},
     // {path: 'supplierOnboarding', component: SupplierOnboardingComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},
