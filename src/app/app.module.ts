@@ -74,6 +74,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ItemMasterComponent } from './components/forms/item-master/item-master.component';
 import { BillGenerateComponent } from './components/forms/bill-generate/bill-generate.component';
 import { RegisteredUserComponent } from './components/common/registered-user/registered-user.component';
+import { CouponComponent } from './components/forms/coupon/coupon.component';
 // import { CustomerFormComponent } from './components/custom/supplier-components/customer-form/customer-form.component';
 // import { SupplierchangerequestComponent } from './components/custom/supplier-components/supplierchangerequest/supplierchangerequest.component';
 // import { EnquiryComparisonByIdComponent } from './components/custom/user-components/enquiry-comparison-by-id/enquiry-comparison-by-id.component';
@@ -127,6 +128,7 @@ import { RegisteredUserComponent } from './components/common/registered-user/reg
     SplitPipe,
     BillGenerateComponent,
     RegisteredUserComponent,
+    CouponComponent,
     // CustomerFormComponent,
     // SupplierchangerequestComponent,
     // EnquiryComparisonByIdComponent,

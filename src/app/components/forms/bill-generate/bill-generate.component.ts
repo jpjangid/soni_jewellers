@@ -73,7 +73,6 @@ export class BillGenerateComponent implements OnInit {
       }
 
       this.apiService.postOTP(object).then((res:any)=>{
-        console.log(res);
         if(res.success){
           this.apiService.showMessage(res.message , 'success');
           this.registerMaster.controls['mobileNo'].setValue(this.otpMaster.value?.mobileNo)
@@ -115,6 +114,19 @@ export class BillGenerateComponent implements OnInit {
 
       this.apiService.register(object).then((res:any)=>{
         console.log(res);
+        if(res.success){
+          this.apiService.showMessage(res.message , 'success');
+          this.registerMaster.reset();
+          Object.keys(this.otpMaster.controls).forEach((key:any)=>{
+            this.otpMaster.controls[key].setErrors(null);
+          })
+          register.resetForm();
+          this.nextPhase = false;
+        }
+
+        else{
+          this.apiService.showMessage(res.message , 'error');
+        }
       })
     }
   }

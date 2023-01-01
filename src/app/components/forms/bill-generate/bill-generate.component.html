@@ -193,12 +193,15 @@
                     <input type="text" class="form-control"
                         formControlName="aadharNo"
                         placeholder="Enter Aadhar Number">
+                    <div *ngIf="registerMaster.get('aadharNo').errors?.pattern && register.submitted">Enter Valid Aadhar Number </div>
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>PAN</label>
                     <input type="text" class="form-control"
                         formControlName="panNo"
                         placeholder="Enter PAN">
+                    <div *ngIf="registerMaster.get('panNo').errors?.pattern && register.submitted"> Enter Valid PAN  </div>
+                    
                 </div>
 
                 <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
