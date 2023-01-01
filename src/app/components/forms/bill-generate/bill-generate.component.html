@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
                         <label>Weight (gm)<span class="star_class">*</span></label>
-                        <input type="number" class="form-control" min="1"
+                        <input type="number" class="form-control"
                             formControlName="weight"
                             placeholder="Enter Product weight"
                             (input)="getNetWeight(index)" 
@@ -112,7 +112,41 @@
     </form>
     <!-- End -->
 
-    <div class="add-listings-box1" *ngIf="nextPhase">
+    <div class="add-listings-box1" *ngIf="nextPhase && !showRegistration">
+        <form [formGroup]="otpMaster" (ngSubmit)="otpMasterSubmit(otp)" #otp="ngForm">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label>Mobile Number<span class="star_class">*</span></label>
+                    <input type="text" class="form-control" minlength="10" formControlName="mobileNo" maxlength="10" placeholder="Enter your Mobile Number" [class.is-invalid]="otp.submitted &&
+                    otpMaster.get('mobileNo')?.invalid ||
+                        (otpMaster.get('mobileNo')?.touched &&
+                        otpMaster.get('mobileNo')?.invalid)" required>
+                    <div class="invalid-feedback"> Mobile Number is Required
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 form-group" *ngIf="showOtp">
+                    <label>OTP<span class="star_class">*</span></label>
+                    <input type="text" class="form-control" formControlName="otp" placeholder="Enter OTP"
+                        [class.is-invalid]="otp.submitted &&
+                        otpMaster.get('otp')?.invalid ||
+                        (otpMaster.get('otp')?.touched &&
+                        otpMaster.get('otp')?.invalid)" minlength="6" required>
+                    <div class="invalid-feedback"> OTP is Required</div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 add-listings-btn" style="margin: 10px 0;">
+                    <label for="test" style="visibility: hidden;">test</label>
+                    <div class="d-flex align-items-center">
+                        <button class="submit_btn" (click)="getOTP()" type="button">{{otpButton}}</button>
+                        <button class="submit_btn mx-2" type="submit">Submit Otp</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Start -->
+    <div class="add-listings-box1" *ngIf="showRegistration">
         <form [formGroup]="registerMaster" (ngSubmit)="registerMasterSubmit(register)" #register="ngForm">
             <div class="row">
                 <div class="col-lg-3 col-md-12 form-group">
@@ -152,27 +186,7 @@
                         registerMaster.get('cname')?.invalid ||
                         (registerMaster.get('cname')?.touched &&
                         registerMaster.get('cname')?.invalid)" required>
-                    <div class="invalid-feedback"> City is Required
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-12 form-group">
-                    <label>Mobile Number<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" minlength="10" formControlName="mobileNo" maxlength="10"
-                        (blur)="getOtp()" placeholder="Enter your Mobile Number" [class.is-invalid]="register.submitted &&
-                        registerMaster.get('mobileNo')?.invalid ||
-                        (registerMaster.get('mobileNo')?.touched &&
-                        registerMaster.get('mobileNo')?.invalid)" required>
-                    <div class="invalid-feedback"> Mobile Number is Required
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-12 form-group" *ngIf="showOtp">
-                    <label>OTP<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" formControlName="otp" placeholder="Enter OTP"
-                        [class.is-invalid]="register.submitted &&
-                        registerMaster.get('otp')?.invalid ||
-                        (registerMaster.get('otp')?.touched &&
-                        registerMaster.get('otp')?.invalid)" required>
-                    <div class="invalid-feedback"> OTP is Required</div>
+                    <div class="invalid-feedback"> City is Required </div>
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
                     <label>Aadhar Number</label>
@@ -193,6 +207,7 @@
             </div>
         </form>
     </div>
+    <!-- End -->
 </div>
 
 

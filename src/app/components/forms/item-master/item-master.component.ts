@@ -125,6 +125,7 @@ export class ItemMasterComponent implements OnInit {
       this.itemMaster.controls['rawPartWeight'].setValue(product.productWt);
       this.itemMaster.controls['stock'].setValue(product.stock);
       this.submitButton = 'Update';
+      window.scroll(0,0)
     }
     else {
       

@@ -45,7 +45,17 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
   }
 
-  
+  getOTP(formData:any) {
+    return this.http.post(this._baseurl+'Registration/OTPGenerate',formData).toPromise();
+  }
+
+  postOTP(formData:any) {
+    return this.http.put(this._baseurl+'Registration/match-otp',formData).toPromise();
+  }
+
+  register(formData:any) {
+    return this.http.post(this._baseurl+'Registration',formData).toPromise();
+  }
   
   billGenerate(object:any){
     return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()

@@ -12,6 +12,7 @@ export class BillGenerateComponent implements OnInit {
   myDate: any;
   loading: boolean = false;
   submitButton: string = 'Submit'
+  otpButton : string = 'Get Otp'
   nextPhase : boolean = false;
   
   constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
@@ -53,15 +54,68 @@ export class BillGenerateComponent implements OnInit {
     fname : new FormControl('' , [Validators.required]),
     sname : new FormControl('' , [Validators.required]),
     cname : new FormControl('' , [Validators.required]),
-    otp : new FormControl('' , [Validators.required]),
     mobileNo : new FormControl('' , [Validators.required]),
     aadharNo : new FormControl('' , [Validators.pattern('^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$')]),
     panNo : new FormControl('' , [Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
   })
 
+  otpMaster = this.fb.group({
+    otp : new FormControl(''),
+    mobileNo : new FormControl('' , [Validators.required])
+  })
+
+  showRegistration : boolean = false;
+  otpMasterSubmit(otp : FormGroupDirective){
+    if(otp.valid){
+      let object = {
+        mobileNo : this.otpMaster.value.mobileNo,
+        otp : Number(this.otpMaster.value.otp)
+      }
+
+      this.apiService.postOTP(object).then((res:any)=>{
+        console.log(res);
+        if(res.success){
+          this.apiService.showMessage(res.message , 'success');
+          this.registerMaster.controls['mobileNo'].setValue(this.otpMaster.value?.mobileNo)
+          this.otpMaster.reset();
+          Object.keys(this.otpMaster.controls).forEach((key:any)=>{
+            this.otpMaster.controls[key].setErrors(null);
+          })
+          otp.resetForm();
+          this.showRegistration = true;
+        }
+
+        else{
+          this.apiService.showMessage(res.message , 'error')
+
+        }
+      })
+    }
+  }
+
   registerMasterSubmit(register : FormGroupDirective){
+    console.log(this.registerMaster.valid , this.registerMaster.controls);
     if(this.registerMaster.valid){
-      this.nextPhase = !this.nextPhase;
+      let object = {
+        "billNo": JSON.parse(localStorage.getItem('billNo')),
+        "name": this.registerMaster.value.name,
+        "fName": this.registerMaster.value.fname,
+        "shopName": this.registerMaster.value.sname,
+        "city": this.registerMaster.value.cname,
+        "mobileNo": this.registerMaster.value.mobileNo,
+      }
+
+      if(this.registerMaster.value.aadharNo){
+        object['aadharCard'] = this.registerMaster.value.aadharNo;
+      }
+
+      if(this.registerMaster.value.panNo){
+        object['panCard'] = this.registerMaster.value.panNo;
+      }
+
+      this.apiService.register(object).then((res:any)=>{
+        console.log(res);
+      })
     }
   }
 
@@ -75,7 +129,6 @@ export class BillGenerateComponent implements OnInit {
   itemMasterSubmit(itemMaster: FormGroupDirective) {
     console.log(this.itemMaster.valid);
     if (this.itemMaster.valid) {
-      this.nextPhase = !this.nextPhase;
       let array : any = [];
       let product = this.getProductList();
       console.log(product.value);
@@ -95,7 +148,15 @@ export class BillGenerateComponent implements OnInit {
         generateBillListDetails : array
       }
 
+      localStorage.setItem('billNo' , JSON.stringify(itemMaster.value.billNo));
+
       this.apiService.billGenerate(object).then((res:any)=>{
+        if(res.success){
+          this.nextPhase = true;
+        }
+        else{
+          this.apiService.showMessage(res.message , 'error')
+        }
         console.log(res); 
       })
 
@@ -155,8 +216,16 @@ export class BillGenerateComponent implements OnInit {
   // productList: any = [];
   totalNetWeight: number = 0;
   showOtp : any;
-  getOtp(){
-    this.showOtp = true;
+  getOTP(){
+    if(this.otpMaster.controls['mobileNo'].valid) {
+      let object = {
+        mobileNo : this.otpMaster.controls['mobileNo'].value
+      }
+      this.apiService.getOTP(object).then((res:any)=> {
+        this.otpMaster.setControl('otp', this.fb.control('', [Validators.required]))
+      })
+      this.showOtp = true;
+    }
   }
 
   removeProduct(index){
