@@ -17,6 +17,7 @@ export class BillGenerateComponent implements OnInit {
   constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
 
   ngOnInit(): void {
+    this.getProducts()
     this.addProduct();
   }
 
@@ -27,19 +28,20 @@ export class BillGenerateComponent implements OnInit {
     }
   ]
 
-  productMasterList: any = [
-    { productId: 0, productName: 'M vali', productWeight: 0.64 },
-    { productId: 1, productName: 'fini casting', productWeight: 0.37 },
-    { productId: 2, productName: 'h fini 48', productWeight: 0.32 },
-    { productId: 3, productName: 'single line bali', productWeight: 0.46 },
-    { productId: 4, productName: 'lung 7ng', productWeight: 0.39 },
-    { productId: 5, productName: '16ng lung', productWeight: 0.47 },
-    { productId: 6, productName: 'tarvali', productWeight: 0.53 },
-    { productId: 7, productName: '1 lung', productWeight: 0.37 },
-    { productId: 8, productName: 'v lung', productWeight: 0.16 },
-    { productId: 9, productName: '16+1 lung', productWeight: 0.47 },
-    { productId: 10, productName: 'h fini 58', productWeight: 0.4 },
-  ];
+  productMasterList: any = [];
+
+  getProducts(){
+    this.apiService.getProducts().then((res:any)=>{
+      console.log(res);
+      if(res.status){
+        this.productMasterList = res.returnValue;
+      }
+
+      else{
+        this.productMasterList = [];
+      }
+    })
+  }
 
   itemMaster = this.fb.group({
     billNo: new FormControl('', [Validators.required]),
@@ -66,7 +68,8 @@ export class BillGenerateComponent implements OnInit {
   getProductWeight(event , index) {
     let productList = this.productMasterList.filter(res => res.productId == event.target.value);
     let product = this.getProductList();
-    product.controls[index].get('tanchIn').setValue(productList[0].productWeight);
+    product.controls[index].get('tanchIn').setValue(productList[0].productWt);
+    product.controls[index].get('productCode').setValue(productList[0].productCode);
   }
 
   itemMasterSubmit(itemMaster: FormGroupDirective) {
@@ -75,13 +78,15 @@ export class BillGenerateComponent implements OnInit {
       this.nextPhase = !this.nextPhase;
       let array : any = [];
       let product = this.getProductList();
+      console.log(product.value);
       product.value.forEach(element => {
         array.push({
           productId : element.productId,
-          productWt : element.productWt,
-          productCode : element.productCode,
-          productQty : element.productQty,
-          netWt : element.netWt
+          productWt : element.weight,
+          productQty : element.tanchOt,
+          netWt : element.netWt,
+          profit : element.profit,
+          productWeight : element.productWeight
         })
       });
 
@@ -106,6 +111,7 @@ export class BillGenerateComponent implements OnInit {
         weight: new FormControl('', [Validators.required]),
         tanchIn: new FormControl('', [Validators.required]),
         netWt: new FormControl('', [Validators.required]),
+        productCode: new FormControl('', [Validators.required]),
         profit: new FormControl('', [Validators.required])
       }))
     }
@@ -147,7 +153,7 @@ export class BillGenerateComponent implements OnInit {
   }
 
   // productList: any = [];
-  totalNetWeight: any = 0;
+  totalNetWeight: number = 0;
   showOtp : any;
   getOtp(){
     this.showOtp = true;
