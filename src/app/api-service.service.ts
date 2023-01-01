@@ -18,6 +18,7 @@ export class ApiServiceService {
     this.messageService.add({ severity: errorMsgCheck, summary: errorMsgCheck, detail: errorMsg });
   }
 
+
   postProduct(object):Promise<any>{
     return this.http.post(this._baseurl + 'Product' , object).toPromise()
   }
@@ -30,19 +31,23 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'Product').toPromise()
   }
 
-  login(object):Promise<any>{
-    return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
-  }
-  
-  billGenerate(object:any){
-    return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()
-  }
-
   getAllProductList(endPoint:any) {
     return this.http.get(this._baseurl+endPoint).toPromise();
   }
 
   deleteProduct(endPoint:any) {
     return this.http.delete(this._baseurl + endPoint).toPromise();
+  }
+
+
+
+  login(object):Promise<any>{
+    return this.http.post(this._baseurl + 'User/jewellerslogin' , object).toPromise()
+  }
+
+  
+  
+  billGenerate(object:any){
+    return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()
   }
 }

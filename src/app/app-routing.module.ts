@@ -53,8 +53,8 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 // import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 
 const routes: Routes = [
-    {path: 'dashboard', component: DashboardComponent, canActivate : [AuthGuardGuard] , data: {roles: ['SuperAdmin' , 'Admin']}},
-    {path: 'dashboard-my-profile', component: DashboardMyProfileComponent, canActivate : [AuthGuardGuard] , data: {roles: ['SuperAdmin' , 'User' , 'Admin' , 'Supplier', 'Normal User' , 'Bussiness head']}},
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'dashboard-my-profile', component: DashboardMyProfileComponent, canActivate : [AuthGuardGuard] ,  data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'linkGeneration', component: DashboardAddListingsComponent , canActivate : [AuthGuardGuard] , data: {roles: ['User' , 'Admin', 'Normal User', 'Bussiness head']}},
 
     // Here add new pages component
@@ -62,8 +62,8 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent , pathMatch: 'full'},
     // {path: 'register/:email', component: UserAccountComponent , pathMatch: 'full'},
     // {path: 'reset-password', component: ResetAccountInfoComponent , pathMatch: 'full'},
-    {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full'},
-    {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full'},
+    {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
+    {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full', canActivate : [AuthGuardGuard], data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'verification', component: VerificationFormComponent , pathMatch: 'full'},
     // {path: 'supplierOnboarding', component: SupplierOnboardingComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},
     // {path: 'raiseChangeRequest', component: SupplierchangerequestComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},

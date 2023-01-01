@@ -49,7 +49,7 @@
                             <option value="" disabled>Select Product Name</option>
                             <ng-container *ngFor="let product of
                                 productMasterList">
-                                <option [value]="product.productId">{{product.productName}}</option>
+                                <option [value]="product.productId">{{product.productCode}}</option>
                             </ng-container>
                         </select>
                     </div>
@@ -175,13 +175,13 @@
                     <div class="invalid-feedback"> OTP is Required</div>
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
-                    <label>Aadhar Number<span class="star_class">*</span></label>
+                    <label>Aadhar Number</label>
                     <input type="text" class="form-control"
                         formControlName="aadharNo"
                         placeholder="Enter Aadhar Number">
                 </div>
                 <div class="col-lg-3 col-md-12 form-group">
-                    <label>PAN<span class="star_class">*</span></label>
+                    <label>PAN</label>
                     <input type="text" class="form-control"
                         formControlName="panNo"
                         placeholder="Enter PAN">
