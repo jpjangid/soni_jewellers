@@ -138,7 +138,7 @@ import { RegisteredUserComponent } from './components/common/registered-user/reg
     AppRoutingModule,
     BrowserAnimationsModule,
     CarouselModule,
-    SelectDropDownModule,
+    // SelectDropDownModule,
     NgxTypedJsModule,
     FormsModule,
     NgxPaginationModule,
