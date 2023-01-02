@@ -14,6 +14,7 @@ export class BillGenerateComponent implements OnInit {
   submitButton: string = 'Submit'
   otpButton : string = 'Get Otp'
   nextPhase : boolean = false;
+  totalFine : any = 0;
   
   constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
 
@@ -216,8 +217,11 @@ export class BillGenerateComponent implements OnInit {
     product.value.forEach((res:any)=>{
       this.totalNetWeight = this.totalNetWeight + res.profit;
     })
-
-    this.totalNetWeight = this.totalNetWeight * 10;
+    product.value.forEach((res:any)=>{
+      this.totalFine = this.totalNetWeight + res.netWeight;
+    })
+    console.log(this.totalNetWeight);
+    this.totalNetWeight = (this.totalNetWeight * 100)/9;
   }
 
 
