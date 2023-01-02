@@ -60,4 +60,8 @@ export class ApiServiceService {
   billGenerate(object:any){
     return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()
   }
+
+  getAllRegisteredUser() {
+    return this.http.get(this._baseurl + 'Registration').toPromise();
+  }
 }

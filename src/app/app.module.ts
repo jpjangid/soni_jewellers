@@ -140,7 +140,7 @@ import { CouponComponent } from './components/forms/coupon/coupon.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     CarouselModule,
-    SelectDropDownModule,
+    // SelectDropDownModule,
     NgxTypedJsModule,
     FormsModule,
     NgxPaginationModule,
