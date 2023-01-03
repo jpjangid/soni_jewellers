@@ -221,8 +221,10 @@ export class BillGenerateComponent implements OnInit {
       console.log(res.profit)
       this.totalNetWeight = this.totalNetWeight + res.profit;
     })
-    // alert(this.totalNetWeight)
-    this.totalFine = JSON.parse(JSON.stringify(this.totalNetWeight));
+    product.value.forEach((res:any)=>{
+      this.totalFine = this.totalNetWeight + res.netWeight;
+    })
+    console.log(this.totalNetWeight);
     this.totalNetWeight = (this.totalNetWeight * 100)/9;
   }
 
