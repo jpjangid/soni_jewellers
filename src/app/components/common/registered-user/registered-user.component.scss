@@ -7,3 +7,9 @@
     border-radius: 5px;
     padding: 10px 25px 10px 25px;
 }
+
+:host::ng-deep {
+    .p-datatable .p-datatable-thead > tr > th {
+        white-space: nowrap;
+    }
+}

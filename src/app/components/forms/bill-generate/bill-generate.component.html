@@ -29,20 +29,29 @@
                         itemMaster.get('billNo')?.invalid)" required>
                     <div class="invalid-feedback"> Bill No. is Required </div>
                 </div>
+                <div class="col-lg-3 col-md-12 form-group">
+                    <label for="status">Bill Date<span class="star_class">*</span></label>
+                    <input type="date" class="form-control" formControlName="billDate" placeholder="Select Bill Date"
+                        [class.is-invalid]="(itemForm.submitted &&
+                        itemMaster.get('billDate')?.invalid) ||
+                        (itemMaster.get('billDate')?.touched &&
+                        itemMaster.get('billDate')?.invalid)" required>
+                    <div class="invalid-feedback"> Bill Date is Required </div>
+                </div>
             </div>
         </div>
 
         <!-- Start -->
         <div class="add-listings-box1" formArrayName="productList">
             <div style="width: 100%; text-align: right;">
-                <span><b>{{totalNetWeight < 100 ? totalNetWeight : 100}}%</b></span>
+                <span><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span>
             </div>
             <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
             <ng-container *ngFor="let form of getProductList().controls; index
                 as index; last as last">
                 <div class="row" [formGroupName]="index">
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label for="status">{{index+1}}. Product Name<span
+                        <label for="status" *ngIf="index == 0">{{index+1}}. Product Name<span
                                 class="star_class">*</span></label>
                         <select name="" id="" class="form-control form-select"
                             formControlName="productId" (change)="getProductWeight($event , index)">
@@ -54,7 +63,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Weight (gm)<span class="star_class">*</span></label>
+                        <label *ngIf="index == 0">Weight (gm)<span class="star_class">*</span></label>
                         <input type="number" class="form-control"
                             formControlName="weight"
                             placeholder="Enter Product weight"
@@ -68,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Tanch<span class="star_class">*</span></label>
+                        <label *ngIf="index == 0">Tanch<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="0"
                             formControlName="tanchOt"
                             placeholder="Enter Tanch" (input)="getNetWeight(index)" 
@@ -82,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 form-group">
-                        <label>Total Fine<span class="star_class">*</span></label>
+                        <label *ngIf="index == 0">Fine<span class="star_class">*</span></label>
                         <span class="form-control">{{form.value.netWt
                             ? (form.value.netWt | number:'0.1-2') :
                             'Enter Product Net Weight'}}</span>
@@ -90,13 +99,18 @@
                     </div>
                     <div class="add-listings-btn">
                         <div class="col-lg-12 form-group d-flex"
-                            style="margin-top: 0!important;">
+                            style="margin-top: 0!important;padding-right: 0;">
                             <div class="col-lg-4 p-0">
                                 <button type="button" class="submit_btn" *ngIf="last" (click)="addProduct()" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">+</button>
                                 <button type="button" class="submit_btn" *ngIf="last && index> 0"
                                     (click)="removeProduct(index)" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">-</button>
+                            </div>
+                            <div *ngIf="totalFine > 0" class="col-lg-8" style="text-align: right;padding-right: 0;">
+                                <strong>
+                                    <!-- Total Fine : {{totalFine | number:'0.1-2'}} {{totalNetWeight}} -->
+                                </strong>
                             </div>
                         </div>
                     </div>

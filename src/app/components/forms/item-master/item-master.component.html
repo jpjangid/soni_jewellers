@@ -74,6 +74,7 @@
                 <th scope="col">Product Name</th>
                 <th scope="col">Purchasing Price</th>
                 <th scope="col">Product Stock</th>
+                <th scope="col">Total Fine</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -83,6 +84,7 @@
                 <td>{{item.productCode}}</td>
                 <td>{{item.productWt}}</td>
                 <td>{{item.stock}}</td>
+                <td>{{item.productWt * item.stock}}</td>
                 <td>
                     <div class="d-flex align-items-center">
                         <i class="pi pi-pencil mr-3" style="cursor: pointer;" pTooltip="Edit" (click)="onClick('edit', index, item)"></i>
