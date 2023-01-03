@@ -66,6 +66,6 @@ export class ApiServiceService {
   }
 
   getBarCode(data:any) {
-    return this.http.get(this._baseurl+'Registration/bar-code?Name=' + data?.name + '&City=' + data?.city + '&MobileNo=' + data?.mobile);
+    return this.http.get(this._baseurl+'Registration/bar-code?Name=' + data?.name + '&City=' + data?.city + '&MobileNo=' + data?.mobile , { responseType: 'blob' }).toPromise();
   }
 }

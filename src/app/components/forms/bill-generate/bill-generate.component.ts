@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/api-service.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class BillGenerateComponent implements OnInit {
   nextPhase : boolean = false;
   totalFine:any=0;
   
-  constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
+  constructor(private fb: FormBuilder , private apiService : ApiServiceService , private router : Router) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -125,6 +126,8 @@ export class BillGenerateComponent implements OnInit {
           })
           register.resetForm();
           this.nextPhase = false;
+          this.showOtp = false;
+          this.router.navigateByUrl('coupon/'+ res.returnValue)
         }
 
         else{
@@ -216,13 +219,15 @@ export class BillGenerateComponent implements OnInit {
 
   getTotalWeight(){
     this.totalNetWeight = 0;
+    this.totalFine = 0;
     let product = this.getProductList();
     product.value.forEach((res:any)=>{
       console.log(res.profit)
       this.totalNetWeight = this.totalNetWeight + res.profit;
     })
     product.value.forEach((res:any)=>{
-      this.totalFine = this.totalNetWeight + res.netWeight;
+      console.log(res.netWt);
+      this.totalFine = this.totalFine + res.netWt;
     })
     console.log(this.totalNetWeight);
     this.totalNetWeight = (this.totalNetWeight * 100)/9;

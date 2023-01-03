@@ -241,4 +241,16 @@
         box-shadow: none;
     }
 }
+
+
+table th {
+    white-space: nowrap;
+}
         
+
+@media(max-width : 768px){
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}

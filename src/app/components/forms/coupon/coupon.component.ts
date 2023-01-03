@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 enum SCRATCH_TYPE {
   BRUSH,
@@ -56,11 +57,12 @@ export class CouponComponent implements OnInit {
   private scratchType: SCRATCH_TYPE;
 
 
-  constructor() {
+  constructor(private router : ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.resetCard();
+    let slug = this.router.snapshot.params;
+    this.resetCard(slug.slug);
   }
 
 
@@ -383,9 +385,8 @@ export class CouponComponent implements OnInit {
     this.ctx.drawImage(img, -(img.width / 2), -(img.height / 2));
   }
 
-  resetCard() {
+  resetCard(slug:any) {
     // this.clearCanvas();
-    console.log('Scratch Card Initilization started');
     const defaults = {
       scratchType: SCRATCH_TYPE.SPRAY,
       containerWidth: 300,
@@ -400,7 +401,7 @@ export class CouponComponent implements OnInit {
       imageForwardSrc: 'https://masth0.github.io/ScratchCard/_nuxt/img/result.0a4b6c7.png',
       imageBackgroundSrc: 'https://masth0.github.io/ScratchCard/_nuxt/img/result.0a4b6c7.png',
       clearZoneRadius: 0,
-      htmlBackground: 'You won 10 in PB',
+      htmlBackground: 'Coupon Code - ' + slug,
       enabledPercentUpdate: true,
       cursor: {
         cur: 'string',

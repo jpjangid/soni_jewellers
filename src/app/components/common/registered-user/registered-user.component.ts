@@ -36,17 +36,10 @@ export class RegisteredUserComponent implements OnInit {
       mobile : mobile
     }
     this._utility.loader(true);
-    this._apiService.getBarCode(object).subscribe((res:any)=> {
+    this._apiService.getBarCode(object).then((res:any)=> {
       this._utility.loader(false);
-      // downloadFile(data: any , name?: any) {
-        var blob = new Blob([res], { type: '.jpeg' });
-        var url = window.URL.createObjectURL(blob);
-        var anchor = document.createElement("a");
-        anchor.download = 'QR_Code' + ".png";
-        anchor.href = url;
-        anchor.click();
-      // }
       console.log(res)
+      this._utility.downloadFile(res , 'QR_Code');
     })
   }
 

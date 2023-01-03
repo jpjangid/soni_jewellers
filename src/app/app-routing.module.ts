@@ -62,11 +62,11 @@ const routes: Routes = [
     // Here add new pages component
     {path: '', redirectTo:'login' , pathMatch: 'full'},
     {path: 'login', component: LoginComponent , pathMatch: 'full'},
-    {path: 'coupon', component: CouponComponent , pathMatch: 'full'},
+    {path: 'coupon/:slug', component: CouponComponent , pathMatch: 'full'},
     // {path: 'register/:email', component: UserAccountComponent , pathMatch: 'full'},
     // {path: 'reset-password', component: ResetAccountInfoComponent , pathMatch: 'full'},
     {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
-    {path: 'registered-user', component: RegisteredUserComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
+    {path: 'registered-user', component: RegisteredUserComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com', 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full', canActivate : [AuthGuardGuard], data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'verification', component: VerificationFormComponent , pathMatch: 'full'},
     // {path: 'supplierOnboarding', component: SupplierOnboardingComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},

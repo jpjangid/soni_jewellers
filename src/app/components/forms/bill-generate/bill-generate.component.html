@@ -107,9 +107,9 @@
                                     (click)="removeProduct(index)" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">-</button>
                             </div>
-                            <div *ngIf="totalFine > 0" class="col-lg-8" style="text-align: right;padding-right: 0;">
+                            <div class="col-lg-8" style="text-align: right;padding-right: 0;" *ngIf="last">
                                 <strong>
-                                    <!-- Total Fine : {{totalFine | number:'0.1-2'}} {{totalNetWeight}} -->
+                                    Total Fine : {{totalFine | number:'0.1-2'}}
                                 </strong>
                             </div>
                         </div>

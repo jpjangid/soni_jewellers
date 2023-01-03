@@ -92,11 +92,14 @@ export class AppUtility {
   getloaderValue(){
     return this._valueLoader;
   }
+
  downloadFile(data: any , name?: any) {
-    var blob = new Blob([data], { type: '.xlsx' });
+  console.log(data , name);
+    var blob = new Blob([data], { type: '.jpeg' });
     var url = window.URL.createObjectURL(blob);
+    console.log(url);
     var anchor = document.createElement("a");
-    anchor.download = name + ".xlsx";
+    anchor.download = name + ".jpeg";
     anchor.href = url;
     anchor.click();
   }
