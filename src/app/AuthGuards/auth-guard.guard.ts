@@ -28,7 +28,7 @@ export class AuthGuardGuard implements CanActivate {
         }
     
         else{
-          this.router.navigateByUrl('/dashboard-my-profile');
+          this.router.navigateByUrl('/billGenerate');
           return false;
         }
     }
