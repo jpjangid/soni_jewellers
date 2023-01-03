@@ -34,6 +34,7 @@
                 <tr>
                     <th>S. No.</th>
                     <th>Bill No.</th>
+                    <th>Bill Date</th>
                     <th>Name</th>
                     <th>Father's Name</th>
                     <th>Mobile No.</th>
@@ -42,20 +43,23 @@
                     <th>Coupan Code</th>
                     <th>Aadhar No.</th>
                     <th>PAN</th>
+                    <th>Bar Code</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-customer let-i="rowIndex">
                 <tr>
                     <td>{{i+1}}</td>
-                    <td>{{customer.billNo}}</td>
-                    <td>{{customer.name}}</td>
-                    <td>{{customer.fName}}</td>
-                    <td>{{customer.mobileNo}}</td>
-                    <td>{{customer.shopName}}</td>
-                    <td>{{customer.city}}</td>
-                    <td>{{customer.coupanCode}}</td>
-                    <td>{{customer.aadharCard}}</td>
-                    <td>{{customer.panCard}}</td>
+                    <td>{{customer?.billNo}}</td>
+                    <td>{{customer?.billDate}}</td>
+                    <td>{{customer?.name}}</td>
+                    <td>{{customer?.fName}}</td>
+                    <td>{{customer?.mobileNo}}</td>
+                    <td>{{customer?.shopName}}</td>
+                    <td>{{customer?.city}}</td>
+                    <td>{{customer?.coupanCode}}</td>
+                    <td>{{customer?.aadharCard}}</td>
+                    <td>{{customer?.panCard}}</td>
+                    <td style="text-align: center;cursor: pointer;" (click)="getImage(customer.name, customer.city, customer.mobileNo)"><i class="pi pi-download"></i></td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">

@@ -14,6 +14,7 @@ export class BillGenerateComponent implements OnInit {
   submitButton: string = 'Submit'
   otpButton : string = 'Get Otp'
   nextPhase : boolean = false;
+  totalFine:any=0;
   
   constructor(private fb: FormBuilder , private apiService : ApiServiceService) { }
 
@@ -46,6 +47,7 @@ export class BillGenerateComponent implements OnInit {
 
   itemMaster = this.fb.group({
     billNo: new FormControl('', [Validators.required]),
+    billDate: new FormControl('', [Validators.required]),
     productList : this.fb.array([])
   })
 
@@ -97,6 +99,7 @@ export class BillGenerateComponent implements OnInit {
     if(this.registerMaster.valid){
       let object = {
         "billNo": JSON.parse(localStorage.getItem('billNo')),
+        "billDate": this.itemMaster.value.billDate,
         "name": this.registerMaster.value.name,
         "fName": this.registerMaster.value.fname,
         "shopName": this.registerMaster.value.sname,
@@ -157,6 +160,7 @@ export class BillGenerateComponent implements OnInit {
 
       let object = {
         billNo : itemMaster.value.billNo,
+        billDate : itemMaster.value.billDate,
         generateBillListDetails : array
       }
 
@@ -214,10 +218,12 @@ export class BillGenerateComponent implements OnInit {
     this.totalNetWeight = 0;
     let product = this.getProductList();
     product.value.forEach((res:any)=>{
+      console.log(res.profit)
       this.totalNetWeight = this.totalNetWeight + res.profit;
     })
-
-    this.totalNetWeight = this.totalNetWeight * 10;
+    // alert(this.totalNetWeight)
+    this.totalFine = JSON.parse(JSON.stringify(this.totalNetWeight));
+    this.totalNetWeight = (this.totalNetWeight * 100)/9;
   }
 
 

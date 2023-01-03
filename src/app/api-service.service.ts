@@ -64,4 +64,8 @@ export class ApiServiceService {
   getAllRegisteredUser() {
     return this.http.get(this._baseurl + 'Registration').toPromise();
   }
+
+  getBarCode(data:any) {
+    return this.http.get(this._baseurl+'Registration/bar-code?Name=' + data?.name + '&City=' + data?.city + '&MobileNo=' + data?.mobile);
+  }
 }
