@@ -13,8 +13,8 @@ export class DashboardNavbarComponent implements OnInit {
   constructor(private _utility : AppUtility , private router : Router) { }
 
   ngOnInit(): void {
-    // let userData  = this._utility.getLocalStorageDetails();
-    // this.userProfile = userData;
+    let userData  = this._utility.getLocalStorageDetails();
+    this.userProfile = userData;
   }
 
   logout(){

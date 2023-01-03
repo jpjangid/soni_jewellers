@@ -15,6 +15,7 @@ export class AuthGuardGuard implements CanActivate {
     this.loginAuth = localStorage.getItem('UserObject');
     this.loginAuth = JSON.parse(this.loginAuth);
     let roles = route.data.roles as Array<string>;
+    this.authorizedflag = false;
     if(this.loginAuth){
         for(let i=0 ; i < roles?.length; i++){
           if(this.loginAuth?.userName == roles[i]){

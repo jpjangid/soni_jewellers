@@ -19,7 +19,7 @@
 
             <!-- sidebar for supplier -->
             <!-- <ng-container *ngIf="roleName == ''"> -->
-                <li class="nav-item" routerLinkActive="active" routerLinkActive="active mm-active">
+                <li class="nav-item" routerLinkActive="active" routerLinkActive="active mm-active" *ngIf="roleName == 'Admin@gmail.com'">
                     <a routerLink="/registered-user" class="nav-link">
                         <span class="icon"><i class='bx bx-wallet'></i></span>
                         <span class="menu-title">Registered User</span>
@@ -32,7 +32,7 @@
                         <span class="menu-title">Master</span>
                     </a>
                     <ul class="sidemenu-nav-second-level">
-                        <li class="nav-item" routerLinkActive="active" routerLinkActive="active mm-active">
+                        <li class="nav-item" routerLinkActive="active" *ngIf="roleName == 'Admin@gmail.com'" routerLinkActive="active mm-active">
                             <a routerLink="/productMaster" class="nav-link">
                                 <span class="icon"><i class='bx bx-wallet'></i></span>
                                 <span class="menu-title">Product Master</span>
