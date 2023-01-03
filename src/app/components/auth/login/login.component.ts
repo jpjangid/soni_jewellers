@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             this.loginForm.controls[key].setErrors(null);
           })
           loginPage.resetForm();
-          this.router.navigateByUrl('dashboard-my-profile')
+          this.router.navigateByUrl('billGenerate')
         }
 
         else{
