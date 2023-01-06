@@ -739,7 +739,6 @@ textarea.form-control {
 .feedback-area {
     &.bg-image {
         background: {
-            image: url(assets/img/feedback-bg.jpg);
             position: center center;
             size: cover;
             repeat: no-repeat;
@@ -1233,15 +1232,6 @@ textarea.form-control {
                         repeat: no-repeat;
                         position: center center !important;
                     };
-                    &.bg1 {
-                        background-image: url(assets/img/blog/blog4.jpg);
-                    }
-                    &.bg2 {
-                        background-image: url(assets/img/blog/blog5.jpg);
-                    }
-                    &.bg3 {
-                        background-image: url(assets/img/blog/blog6.jpg);
-                    }
                 }
                 &::before, &::after {
                     transition: all .8s cubic-bezier(.2, 1, .22, 1);
