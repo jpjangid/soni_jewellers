@@ -16,6 +16,7 @@ export class BillGenerateComponent implements OnInit {
   otpButton : string = 'Get Otp'
   nextPhase : boolean = false;
   totalFine:any=0;
+  coupanCode: any;
   
   constructor(private fb: FormBuilder , private apiService : ApiServiceService , private router : Router) { }
 
@@ -30,6 +31,8 @@ export class BillGenerateComponent implements OnInit {
       subTitle: 'Dashboard'
     }
   ]
+
+  displayResponsive:boolean = false;
 
   productMasterList: any = [];
 
@@ -127,7 +130,9 @@ export class BillGenerateComponent implements OnInit {
           register.resetForm();
           this.nextPhase = false;
           this.showOtp = false;
-          this.router.navigateByUrl('coupon/'+ res.returnValue)
+          // this.router.navigateByUrl('coupon/'+ res.returnValue);
+          this.coupanCode = res?.returnValue;
+          this.displayResponsive = true
         }
 
         else{

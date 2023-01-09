@@ -16,25 +16,30 @@
     </div>
 
     <div class="add-listings-box1" *ngIf="users?.length > 0">
-        <p-table #dt [value]="users | groupby : 'billNo'" dataKey="id" [rowHover]="true" [rows]="10" responsiveLayout="scroll"
-            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-            [globalFilterFields]="['name','fName','mobileNo','shopName','city','coupanCode']">
+        <p-table #dt [value]="users" dataKey="id" [rowHover]="true" [rows]="10"
+            responsiveLayout="scroll" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [filterDelay]="0" [globalFilterFields]="['name','fName','mobileNo','shopName','city','coupanCode']">
             <ng-template pTemplate="caption">
                 <!-- <div class="table-header"> -->
-                    <!-- List of Customers -->
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                            placeholder="Global Search" />
-                    </span>
+                <!-- List of Customers -->
+                <span class="p-input-icon-left d-flex align-items-center">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" [(ngModel)]="filterval" />
+                            <p-calendar appendTo="body" class="ml-2" dateFormat="dd-mm-yy" placeholder="Bill Date"
+                                 [(ngModel)]="dateFilterVal"
+                                (onSelect)="searchFilter($event)">
+                            </p-calendar>
+                            <p-button type="button" class="ml-2" (click)="reset(dt)" icon="bx bx-reset"></p-button>
+                </span>
                 <!-- </div> -->
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="min-width: 120px;">S. No.</th>
-                    <th style="min-width: 120px;">Bill No.</th>
-                    <th style="min-width: 200px;">Bill Date</th>
+                    <th>S. No.</th>
+                    <th>Bill No.</th>
+                    <th>Bill Date</th>
                     <th>Name</th>
                     <th>Father's Name</th>
                     <th>Mobile No.</th>
@@ -49,17 +54,19 @@
             <ng-template pTemplate="body" let-customer let-i="rowIndex">
                 <tr>
                     <td>{{i+1}}</td>
-                    <td style="min-width: 120px;">{{customer?.value[0].billNo}}</td>
-                    <td>{{customer?.value[0].billDate | date}}</td>
-                    <td>{{customer?.value[0].name}}</td>
-                    <td>{{customer?.value[0].fName}}</td>
-                    <td>{{customer?.value[0].mobileNo}}</td>
-                    <td>{{customer?.value[0].shopName}}</td>
-                    <td>{{customer?.value[0].city}}</td>
-                    <td>{{customer?.value[0].coupanCode}}</td>
-                    <td>{{customer?.value[0].aadharCard ? customer?.value[0].aadharCard : '-'}}</td>
-                    <td>{{customer?.value[0].panCard ? customer?.value[0].panCard : '-'}}</td>
-                    <td style="text-align: center;cursor: pointer;" (click)="getImage(customer.name, customer.city, customer.mobileNo)"><i class="pi pi-download"></i></td>
+                    <td>{{customer?.billNo}}</td>
+                    <td>{{customer?.billDate}}</td>
+                    <td>{{customer?.name}}</td>
+                    <td>{{customer?.fName}}</td>
+                    <td>{{customer?.mobileNo}}</td>
+                    <td>{{customer?.shopName}}</td>
+                    <td>{{customer?.city}}</td>
+                    <td>{{customer?.coupanCode}}</td>
+                    <td>{{customer?.aadharCard ? customer?.aadharCard : '-'}}</td>
+                    <td>{{customer?.panCard ? customer?.panCard : '-'}}</td>
+                    <td style="text-align: center;cursor: pointer;"
+                        (click)="getImage(customer.name, customer.city, customer.mobileNo)"><i
+                            class="pi pi-download"></i></td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
@@ -69,5 +76,5 @@
             </ng-template>
         </p-table>
     </div>
-    
+
 </div>

@@ -38,6 +38,7 @@ interface SC_CONFIG {
 
 
 export class CouponComponent implements OnInit {
+  displayResponsive = true;
   name = 'Angular';
   @ViewChild('canvas', {static : true}) canvas: ElementRef;
   canvasElement: HTMLCanvasElement;
@@ -56,7 +57,7 @@ export class CouponComponent implements OnInit {
   private config: SC_CONFIG;
   private scratchType: SCRATCH_TYPE;
 
-
+  
   constructor(private router : ActivatedRoute) {
   }
 

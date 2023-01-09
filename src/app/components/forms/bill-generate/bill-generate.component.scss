@@ -26,53 +26,58 @@
     }
 
     // form {
-        .form-group {
-            margin: 10px 0;    
-            .form-control {
-                border: 1px solid #d5d5d5 !important;
-                border-radius: 5px;
-               
-                padding-top: 6px;
-            }
+    .form-group {
+        margin: 5px 0;
 
-            span{
-                background-color: #f9f9f9 !important;
-            }
+        .form-control {
+            border: 1px solid #d5d5d5 !important;
+            border-radius: 5px;
+
+            padding-top: 6px;
         }
 
-        input , select{
-            height: 35px;
+        span {
+            background-color: #f9f9f9 !important;
         }
+    }
 
-        label{
-            display: block;
-            margin-bottom: 5px;
-            color: var(--blackColor);
-            position: relative;
-            padding-left: 2px;
-            font-weight: 500;
-            font-size: 14px;
-        }
+    input,
+    select {
+        height: 35px;
+    }
 
-        .radio-buttons{
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--blackColor);
+        position: relative;
+        padding-left: 2px;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .radio-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100px;
+
+        .radio-button {
             display: flex;
-            justify-content: space-between;
-            width: 100px;
-            .radio-button{
-                display: flex;
-                align-items: center;
-                margin: 5px 0 0;
-                input{
-                    margin-bottom: 0;
-                }
+            align-items: center;
+            margin: 5px 0 0;
+
+            input {
+                margin-bottom: 0;
             }
         }
+    }
 
     // }
 }
 
 .add-listings-btn {
-    padding-left: 0!important;
+    padding-left: 0 !important;
+
     button {
         display: inline-block;
         padding: 8px 30px;
@@ -80,6 +85,7 @@
         border-radius: 5px;
         transition: var(--transition);
         border: none;
+
         font: {
             size: var(--fontSize);
             weight: 600;
@@ -93,25 +99,25 @@
         }
     }
 
-    .reset_btn{
+    .reset_btn {
         background-color: var(--optionalColor);
         color: var(--whiteColor);
     }
 
-    .submit_btn{
+    .submit_btn {
         background-color: var(--mainColor2);
         color: var(--whiteColor);
 
     }
 }
 
-.alert{
+.alert {
     padding: 10px;
     margin-top: 5px;
 }
 
 
-.star_class{
+.star_class {
     color: red;
 }
 
@@ -159,7 +165,7 @@
         }
     }
 
-    table{
+    table {
         overflow-x: scroll;
         display: block;
     }
@@ -183,7 +189,7 @@
 
     .form-group {
         label {
-            margin-bottom: 3px!important;
+            margin-bottom: 3px !important;
         }
     }
 }
@@ -198,20 +204,27 @@
     }
 }
 
-::ng-deep{
-    .p-progressbar{
+::ng-deep {
+    @media (max-width: 425px) {
+        .p-progressbar {
+            width: 100%!important;
+        }
+    }
+}
+
+::ng-deep {
+    .p-progressbar {
         height: 18px;
         width: 250px;
     }
 
-    p-progressbar{
+    p-progressbar {
         display: flex;
-        justify-content: right;
+        // justify-content: right;
         margin: 10px 0;
     }
 
-    .p-progressbar .p-progressbar-value{
-        background: #28a745!important;
+    .p-progressbar .p-progressbar-value {
+        background: #28a745 !important;
     }
 }
-        

@@ -55,7 +55,7 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 // import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 
 const routes: Routes = [
-    {path: 'dashboard', component: DashboardComponent},
+    {path: 'dashboard', component: DashboardComponent,  canActivate : [AuthGuardGuard] ,  data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     {path: 'dashboard-my-profile', component: DashboardMyProfileComponent, canActivate : [AuthGuardGuard] ,  data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'linkGeneration', component: DashboardAddListingsComponent , canActivate : [AuthGuardGuard] , data: {roles: ['User' , 'Admin', 'Normal User', 'Bussiness head']}},
 

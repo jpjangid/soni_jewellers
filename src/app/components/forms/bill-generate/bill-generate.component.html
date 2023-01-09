@@ -1,5 +1,14 @@
 <app-dashboard-sidemenu></app-dashboard-sidemenu>
-
+<p-dialog header="Coupan" [modal]="true" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false" [closable]="false">
+    <div class="text-center">
+        <h1>Coupan Code is <Strong>{{coupanCode}}</Strong></h1>
+    </div>
+        <ng-template pTemplate="footer">
+        <!-- <p-button (click)="displayResponsive=false" routerLink="/registered-user" label="No" styleClass="p-button-text"></p-button> -->
+        <p-button (click)="displayResponsive=false" routerLink="/registered-user" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
 <!-- Start Main Content Wrapper Area -->
 <div class="main-content d-flex flex-column">
 
@@ -20,7 +29,7 @@
     <form [formGroup]="itemMaster" (ngSubmit)="itemMasterSubmit(itemForm)" #itemForm="ngForm" *ngIf="!nextPhase">
         <div class="add-listings-box1">
             <div class="row">
-                <div class="col-lg-3 col-md-12 form-group">
+                <div class="col-lg-3 col-md-6 col-6 form-group">
                     <label for="status">Bill No.<span class="star_class">*</span></label>
                     <input type="text" class="form-control" formControlName="billNo" placeholder="Enter Bill No."
                         [class.is-invalid]="(itemForm.submitted &&
@@ -29,7 +38,7 @@
                         itemMaster.get('billNo')?.invalid)" required>
                     <div class="invalid-feedback"> Bill No. is Required </div>
                 </div>
-                <div class="col-lg-3 col-md-12 form-group">
+                <div class="col-lg-3 col-md-6 col-6 form-group">
                     <label for="status">Bill Date<span class="star_class">*</span></label>
                     <input type="date" class="form-control" formControlName="billDate" placeholder="Select Bill Date"
                         [class.is-invalid]="(itemForm.submitted &&
@@ -43,10 +52,18 @@
 
         <!-- Start -->
         <div class="add-listings-box1" formArrayName="productList">
-            <div style="width: 100%; text-align: right;">
-                <span><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span>
+            <div class="d-flex align-items-center justify-content-between">
+                <div style="width: 50%; text-align: left;">
+                    <span><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span>
+                    <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
+                </div>
+                <div class="" style="">
+                    <span style="visibility: hidden;"><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span><br>
+                    <strong>
+                        Total Fine : {{totalFine | number:'0.1-2'}}
+                    </strong>
+                </div>
             </div>
-            <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
             <ng-container *ngFor="let form of getProductList().controls; index
                 as index; last as last">
                 <div class="row" [formGroupName]="index">
@@ -62,7 +79,7 @@
                             </ng-container>
                         </select>
                     </div>
-                    <div class="col-lg-3 col-md-12 form-group">
+                    <div class="col-lg-3 col-md-12 col-6 form-group">
                         <label *ngIf="index == 0">Weight (gm)<span class="star_class">*</span></label>
                         <input type="number" class="form-control"
                             formControlName="weight"
@@ -76,7 +93,7 @@
                         <div class="invalid-feedback"> Product Weight is Required
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-12 form-group">
+                    <div class="col-lg-3 col-md-12 col-6 form-group">
                         <label *ngIf="index == 0">Tanch<span class="star_class">*</span></label>
                         <input type="number" class="form-control" min="0"
                             formControlName="tanchOt"
@@ -97,7 +114,7 @@
                             'Enter Product Net Weight'}}</span>
 
                     </div>
-                    <div class="add-listings-btn">
+                    <div class="add-listings-btn" *ngIf="last">
                         <div class="col-lg-12 form-group d-flex"
                             style="margin-top: 0!important;padding-right: 0;">
                             <div class="col-lg-4 p-0">
@@ -107,19 +124,13 @@
                                     (click)="removeProduct(index)" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">-</button>
                             </div>
-                            <div class="col-lg-8" style="text-align: right;padding-right: 0;" *ngIf="last">
-                                <strong>
-                                    Total Fine : {{totalFine | number:'0.1-2'}}
-                                </strong>
+                            <div class="col-lg-8 add-listings-btn text-right p-0" *ngIf="totalNetWeight >= 100">
+                                <button class="submit_btn" type="submit">Next</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </ng-container>
-
-            <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
-                <button class="submit_btn" type="submit">Next</button>
-            </div>
         </div>
 
         <!-- End -->
@@ -148,7 +159,7 @@
                     <div class="invalid-feedback"> OTP is Required</div>
                 </div>
 
-                <div class="col-lg-6 col-md-12 add-listings-btn" style="margin: 10px 0;">
+                <div class="col-lg-6 col-md-12 add-listings-btn" style="margin: 5px 0;">
                     <label for="test" style="visibility: hidden;">test</label>
                     <div class="d-flex align-items-center">
                         <button class="submit_btn" (click)="getOTP()" type="button">{{otpButton}}</button>
