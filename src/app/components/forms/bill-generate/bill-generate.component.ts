@@ -244,7 +244,7 @@ export class BillGenerateComponent implements OnInit {
   }
 
   // productList: any = [];
-  totalNetWeight: number = 0;
+  totalNetWeight: any = 0;
   showOtp : any;
   getOTP(){
     if(this.otpMaster.controls['mobileNo'].valid) {

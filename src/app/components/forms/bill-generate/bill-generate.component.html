@@ -56,8 +56,9 @@
                 <div style="width: 50%; text-align: left;">
                     <span><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span>
                     <p-progressBar [style]="{'height': '20px'}" [value]="totalNetWeight" [showValue]="false"></p-progressBar>
+
                 </div>
-                <div class="" style="">
+                <div>
                     <span style="visibility: hidden;"><b>{{(totalNetWeight < 100 ? totalNetWeight : 100) | number:'0.1-2'}}%</b></span><br>
                     <strong>
                         Total Fine : {{totalFine | number:'0.1-2'}}
@@ -124,7 +125,7 @@
                                     (click)="removeProduct(index)" style="padding : 6px 15px 6px;
                                     margin-right: 5px; height: 35px;">-</button>
                             </div>
-                            <div class="col-lg-8 add-listings-btn text-right p-0" *ngIf="totalNetWeight >= 100">
+                            <div class="col-lg-8 add-listings-btn text-right p-0" *ngIf="totalNetWeight >= 99.99">
                                 <button class="submit_btn" type="submit">Next</button>
                             </div>
                         </div>
@@ -229,7 +230,7 @@
                     
                 </div>
 
-                <div class="add-listings-btn text-right" *ngIf="totalNetWeight >= 100">
+                <div class="add-listings-btn text-right">
                     <button class="submit_btn" type="submit">Submit</button>
                 </div>
             </div>

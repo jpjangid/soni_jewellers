@@ -24,13 +24,13 @@
         <form [formGroup]="itemMaster" (ngSubmit)="itemMasterSubmit(itemForm)" #itemForm="ngForm">
             <div class="row">
                 <div class="col-lg-4 col-md-12 form-group">
-                    <label for="status">Product Name<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" formControlName="itemCode" placeholder="Enter Product Name"
+                    <label for="status">Item Name<span class="star_class">*</span></label>
+                    <input type="text" class="form-control" formControlName="itemCode" placeholder="Enter Item Name"
                         [class.is-invalid]="(itemForm.submitted &&
                         itemMaster.get('itemCode')?.invalid) ||
                         (itemMaster.get('itemCode')?.touched &&
                         itemMaster.get('itemCode')?.invalid)" required>
-                    <div class="invalid-feedback"> Product Name is Required </div>
+                    <div class="invalid-feedback"> Item Name is Required </div>
                 </div>
                 <div class="col-lg-4 col-md-12 form-group">
                     <label>Purchasing Price<span class="star_class">*</span></label>
@@ -45,11 +45,11 @@
                 <div class="col-lg-4 col-md-12 form-group">
                     <label>Stock<span class="star_class">*</span></label>
                     <input type="number" class="form-control" min="0" formControlName="stock" maxlength="6"
-                        placeholder="Enter Product Stock" [class.is-invalid]="itemForm.submitted &&
+                        placeholder="Enter Item Stock" [class.is-invalid]="itemForm.submitted &&
                         itemMaster.get('stock')?.invalid ||
                         (itemMaster.get('stock')?.touched &&
                         itemMaster.get('stock')?.invalid)" required>
-                    <div class="invalid-feedback"> Product Stock is Required
+                    <div class="invalid-feedback"> Item Stock is Required
                     </div>
                 </div>
                 <div class="add-listings-btn col-lg-12 col-md-12">
@@ -71,9 +71,9 @@
             <thead>
               <tr>
                 <th scope="col">S. No.</th>
-                <th scope="col">Product Name</th>
+                <th scope="col">Item Name</th>
                 <th scope="col">Purchasing Price</th>
-                <th scope="col">Product Stock</th>
+                <th scope="col">Item Stock</th>
                 <th scope="col">Total Fine</th>
                 <th scope="col">Action</th>
               </tr>
