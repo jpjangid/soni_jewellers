@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/api-service.service';
 
 @Component({
   selector: 'app-stats',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsComponent implements OnInit {
 
-  constructor() { }
+  data : any = {}
 
-  ngOnInit(): void {
+  constructor(private apiService : ApiServiceService) { }
+
+  ngOnInit() {
+    this.apiService.getAllData().then((res:any)=> {
+      this.data = res?.returnValue[0];
+    })
   }
 
 }

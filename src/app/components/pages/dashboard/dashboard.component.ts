@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/api-service.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -7,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-    constructor() { }
+    constructor(private apiService : ApiServiceService) { }
 
-    ngOnInit(): void {
+    async ngOnInit() {
+        // await this.apiService.getAllData().then((res:any)=> {
+        //     console.log(res);
+        // })
     }
 
     breadcrumb = [
         {
-            title: 'Howdy, Andy!',
+            title: 'Hey, Soni Jewellers',
             subTitle: 'Dashboard'
         }
     ]

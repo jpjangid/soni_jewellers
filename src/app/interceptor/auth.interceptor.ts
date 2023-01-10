@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
       .pipe(catchError((err: HttpErrorResponse) => {
           if (err.status === 401) {
             localStorage.removeItem('UserObject');
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/login']);
           }
           if (err.status === 400) {
             if (Object.values(err.error)[0][0]) {
@@ -56,13 +56,13 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status === 500) {
             if (err.error.message == 'Object reference not set to an instance of an object') {
               localStorage.removeItem('UserObject');
-              this.router.navigate(['/auth/login']);
+              this.router.navigate(['/login']);
             }
 
             else{
               this.apiService.showMessage(err.error.message || err.statusText , 'error');
-              this._utility.loader(false);
             }
+            this._utility.loader(false);
           }
     
           if(err.status === 415){
