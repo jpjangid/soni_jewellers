@@ -49,8 +49,7 @@
                         itemMaster.get('stock')?.invalid ||
                         (itemMaster.get('stock')?.touched &&
                         itemMaster.get('stock')?.invalid)" required>
-                    <div class="invalid-feedback"> Item Stock is Required
-                    </div>
+                    <div class="invalid-feedback"> Item Stock is Required </div>
                 </div>
                 <div class="add-listings-btn col-lg-12 col-md-12">
                     <div class="form-group">
@@ -84,7 +83,7 @@
                 <td>{{item.productCode}}</td>
                 <td>{{item.productWt}}</td>
                 <td>{{item.stock}}</td>
-                <td>{{item.productWt * item.stock}}</td>
+                <td>{{item.productWt * item.stock | number:'0.1-2'}}</td>
                 <td>
                     <div class="d-flex align-items-center">
                         <i class="pi pi-pencil mr-3" style="cursor: pointer;" pTooltip="Edit" (click)="onClick('edit', index, item)"></i>
