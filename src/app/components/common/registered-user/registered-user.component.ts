@@ -18,7 +18,7 @@ export class RegisteredUserComponent implements OnInit {
     }
   ]
 
-  dateFilterVal:string;
+  dateFilterVal:string = '';
 
   users:any = [];
   filterval: string;
@@ -32,26 +32,28 @@ export class RegisteredUserComponent implements OnInit {
     await this._apiService.getAllRegisteredUser().then((res:any) => {
       console.log(res);
       // this.users = res?.returnValue;
-      res?.returnValue.forEach(element => {
-        element.billDate = moment(element.billDate).format('DD-MM-YYYY')
-      });
-      this.users = [...new Map(res?.returnValue.map(item => [item['billNo'], item])).values()];
-      console.log(this.users)
-      this._utility.loader(false);
+      if(res.success){
+        res?.returnValue.forEach(element => {
+          element.billDate = moment(element.billDate).format('DD-MM-YYYY')
+        });
+        this.users = [...new Map(res?.returnValue.map(item => [item['billNo'], item])).values()];
+        console.log(this.users)
+        this._utility.loader(false);
+      }
+
+      else{
+        this._utility.loader(false);
+      }
     })
   }
 
-  getImage(name:any, city:any, mobile:any) {
-    let object = {
-      name : name,
-      city : city,
-      mobile : mobile
-    }
+  getImage(registrationId) {
+    console.log(registrationId);
     this._utility.loader(true);
-    this._apiService.getBarCode(object).then((res:any)=> {
+    this._apiService.getBarCode(registrationId).then((res:any)=> {
       this._utility.loader(false);
-      console.log(res)
-      this._utility.downloadFile(res , 'QR_Code');
+      console.log(res.filePath1)
+      this._utility.downloadFile(res.filePath1 , 'QR_Code');
     })
   }
 

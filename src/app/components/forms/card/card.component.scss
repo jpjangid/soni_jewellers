@@ -1,0 +1,176 @@
+@import "../../pages/dashboard/dashboard.component.scss";
+
+.add-listings-box1 {
+    margin-bottom: 30px;
+    background-color: var(--whiteColor);
+    box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+    border-radius: 5px;
+    padding: 10px 25px 10px 25px;
+    height: 100vh;
+    h3 {
+        padding: 10px 25px 10px;
+        border-bottom: 1px dashed #eeeeee;
+
+        font: {
+            size: 17px;
+            weight: 600;
+        }
+
+        margin: {
+            bottom: 25px;
+            left: -25px;
+            right: -25px;
+        }
+
+        ;
+    }
+
+    form {
+        .form-group {
+            margin: 10px 0;    
+            .form-control {
+                border: 1px solid #d5d5d5 !important;
+                border-radius: 5px;
+                background-color: #f9f9f9 !important;
+                padding-top: 6px;
+            }
+        }
+
+        input , select{
+            height: 35px;
+        }
+
+        label{
+            display: block;
+            margin-bottom: 5px;
+            color: var(--blackColor);
+            position: relative;
+            padding-left: 2px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .radio-buttons{
+            display: flex;
+            justify-content: space-between;
+            width: 100px;
+            .radio-button{
+                display: flex;
+                align-items: center;
+                margin: 5px 0 0;
+                input{
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+    }
+
+    .add-card{
+        width: 280px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #dedede;
+        box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .09);
+    }
+}
+@media print {
+    .add-listings-btn {
+        display: none;
+    }
+}
+.add-listings-btn {
+
+    button {
+        display: inline-block;
+        padding: 8px 30px;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+        border-radius: 5px;
+        margin-top: 25px;
+        transition: var(--transition);
+        border: none;
+        font: {
+            size: var(--fontSize);
+            weight: 600;
+        }
+
+        ;
+
+        &:hover {
+            background-color: #3b99ca;
+            color: var(--whiteColor);
+        }
+    }
+
+    .reset_btn{
+        background-color: var(--optionalColor);
+        color: var(--whiteColor);
+    }
+
+    .submit_btn{
+        background-color: var(--mainColor2);
+        color: var(--whiteColor);
+    }
+}
+
+.alert{
+    padding: 10px;
+    margin-top: 5px;
+}
+
+
+.star_class{
+    color: red;
+}
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+
+    .add-listings-box {
+        padding: 0 20px 0 20px;
+
+        h3 {
+            padding: 15px 20px;
+
+            margin: {
+                bottom: 20px;
+                left: -20px;
+                right: -20px;
+            }
+
+            ;
+        }
+
+        .form-group {
+            .form-control {
+                height: 35px;
+                font-size: 13.5px;
+
+                padding: {
+                    right: 10px;
+                    left: 10px;
+                }
+
+                ;
+            }
+
+            select {
+                height: 35px;
+                line-height: 45px;
+                font-size: 13.5px;
+
+                padding: {
+                    right: 10px;
+                    left: 10px;
+                }
+            }
+        }
+    }
+
+}
+
+.error {
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}

@@ -29,7 +29,7 @@ export class ItemMasterComponent implements OnInit {
 
   breadcrumb = [
     {
-      title: 'Product Master',
+      title: 'Item Master',
       subTitle: 'Dashboard'
     }
   ]

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import * as moment from 'moment';
 import { ApiServiceService } from '../api-service.service';
-
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
 @Injectable({
   providedIn: 'root'
 })
@@ -94,13 +95,10 @@ export class AppUtility {
   }
 
  downloadFile(data: any , name?: any) {
-  console.log(data , name);
-    var blob = new Blob([data], { type: '.jpeg' });
-    var url = window.URL.createObjectURL(blob);
-    console.log(url);
     var anchor = document.createElement("a");
-    anchor.download = name + ".jpeg";
-    anchor.href = url;
+    anchor.download = "QR_Code.pdf";
+    anchor.href = data;
+    anchor.target = '_blank'
     anchor.click();
   }
 

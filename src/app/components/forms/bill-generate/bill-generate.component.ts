@@ -246,6 +246,7 @@ export class BillGenerateComponent implements OnInit {
   // productList: any = [];
   totalNetWeight: any = 0;
   showOtp : any;
+  otpButtonType : boolean = false;
   getOTP(){
     if(this.otpMaster.controls['mobileNo'].valid) {
       let object = {
@@ -254,6 +255,12 @@ export class BillGenerateComponent implements OnInit {
       this.apiService.getOTP(object).then((res:any)=> {
         this.otpMaster.setControl('otp', this.fb.control('', [Validators.required]))
       })
+
+      this.otpButtonType = true;
+
+      setTimeout(() => {
+      this.otpButtonType = false;
+      }, 30000);
       this.showOtp = true;
     }
   }

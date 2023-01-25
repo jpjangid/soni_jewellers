@@ -40,6 +40,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-6 form-group">
                     <label for="status">Bill Date<span class="star_class">*</span></label>
+                    <!-- <p-calendar formControlName="billDate" [showIcon]="true" [class.is-invalid]="(itemForm.submitted &&
+                    itemMaster.get('billDate')?.invalid) ||
+                    (itemMaster.get('billDate')?.touched &&
+                    itemMaster.get('billDate')?.invalid)" placeholder="Select Bill Date"></p-calendar> -->
                     <input type="date" class="form-control" formControlName="billDate" placeholder="Select Bill Date"
                         [class.is-invalid]="(itemForm.submitted &&
                         itemMaster.get('billDate')?.invalid) ||
@@ -152,18 +156,18 @@
                 </div>
                 <div class="col-lg-3 col-md-12 form-group" *ngIf="showOtp">
                     <label>OTP<span class="star_class">*</span></label>
-                    <input type="text" class="form-control" formControlName="otp" placeholder="Enter OTP"
+                    <input type="text" maxlength="6" minlength="4" class="form-control" formControlName="otp" placeholder="Enter OTP"
                         [class.is-invalid]="otp.submitted &&
                         otpMaster.get('otp')?.invalid ||
                         (otpMaster.get('otp')?.touched &&
-                        otpMaster.get('otp')?.invalid)" minlength="6" required>
+                        otpMaster.get('otp')?.invalid)" required>
                     <div class="invalid-feedback"> OTP is Required</div>
                 </div>
 
                 <div class="col-lg-6 col-md-12 add-listings-btn" style="margin: 5px 0;">
                     <label for="test" style="visibility: hidden;">test</label>
                     <div class="d-flex align-items-center">
-                        <button class="submit_btn" (click)="getOTP()" type="button">{{otpButton}}</button>
+                        <button class="submit_btn" (click)="getOTP()" *ngIf="!otpButtonType" type="button" [disabled]="otpButtonType">{{otpButton}}</button>
                         <button class="submit_btn mx-2" type="submit">Submit Otp</button>
                     </div>
                 </div>

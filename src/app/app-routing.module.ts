@@ -4,6 +4,7 @@ import { AuthGuardGuard } from './AuthGuards/auth-guard.guard';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisteredUserComponent } from './components/common/registered-user/registered-user.component';
 import { BillGenerateComponent } from './components/forms/bill-generate/bill-generate.component';
+import { CardComponent } from './components/forms/card/card.component';
 import { ItemMasterComponent } from './components/forms/item-master/item-master.component';
 // import { CostBreakerComponent } from './components/custom/admin-components/cost-breaker/cost-breakup.component';
 // import { ItemMasterComponent } from './components/custom/admin-components/item-master/item-master.component';
@@ -65,6 +66,7 @@ const routes: Routes = [
     // {path: 'reset-password', component: ResetAccountInfoComponent , pathMatch: 'full'},
     {path: 'productMaster', component: ItemMasterComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com']}},
     {path: 'registered-user', component: RegisteredUserComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data : {roles : ['Admin@gmail.com', 'Staff@gmail.com' , 'Staff1@gmail.com']}},
+    {path: 'registered-user/:id', component: CardComponent , pathMatch: 'full'},
     {path: 'billGenerate', component: BillGenerateComponent , pathMatch: 'full', canActivate : [AuthGuardGuard], data : {roles : ['Admin@gmail.com' , 'Staff@gmail.com' , 'Staff1@gmail.com']}},
     // {path: 'verification', component: VerificationFormComponent , pathMatch: 'full'},
     // {path: 'supplierOnboarding', component: SupplierOnboardingComponent , pathMatch: 'full' , canActivate : [AuthGuardGuard] , data: {roles: ['Supplier']}},
@@ -95,6 +97,7 @@ const routes: Routes = [
     // {path: 'supplierAssignList', component: SupplierAssignListComponent , pathMatch: 'full' , data: {roles: ['SuperAdmin' , 'Admin' , 'User' , 'Normal User' , 'Bussiness head']}},    
     // {path: 'documentMaster', component: DocumentMasterComponent , pathMatch: 'full' , data: {roles: ['SuperAdmin' , 'Admin' , 'User' , 'Normal User' , 'Bussiness head']}},    
     {path: '**', component: NotFoundComponent}, // This line will remain down from the whole pages component list
+    {path: 'notFound', component: NotFoundComponent}, // This line will remain down from the whole pages component list
 ];
 
 @NgModule({

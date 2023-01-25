@@ -1,4 +1,4 @@
 export const environment = {
-  base_url : 'http://103.155.84.143:9091/api/',
+  base_url : 'https://api.adorntourism.com/api/',
   production: true
 };

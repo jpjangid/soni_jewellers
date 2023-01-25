@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { HttpUrlEncodingCodec } from '@angular/common/http';
 
@@ -65,11 +65,16 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'Registration').toPromise();
   }
 
-  getBarCode(data:any) {
-    return this.http.get(this._baseurl+'Registration/bar-code?Name=' + data?.name + '&City=' + data?.city + '&MobileNo=' + data?.mobile , { responseType: 'blob' }).toPromise();
+  getRegisteredUserById(id:any) {
+    return this.http.get(this._baseurl + 'Registration/' + id).toPromise();
+  }
+
+  getBarCode(registrationId:any) {
+    return this.http.get(this._baseurl+'Registration/bar-code?RegistrationId=' + registrationId).toPromise();
   }
 
   getAllData() {
     return this.http.get(this._baseurl+'Counter').toPromise();
   }
+
 }

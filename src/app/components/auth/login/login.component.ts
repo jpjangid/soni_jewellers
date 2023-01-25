@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    loginUser : new FormControl('' , [Validators.required , Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
+    loginUser : new FormControl('' , [Validators.required , Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$')]),
     loginPassword : new FormControl('' , [Validators.required])
   })
 

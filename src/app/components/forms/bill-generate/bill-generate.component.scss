@@ -207,12 +207,10 @@
 ::ng-deep {
     @media (max-width: 425px) {
         .p-progressbar {
-            width: 100%!important;
+            width: 100% !important;
         }
     }
-}
 
-::ng-deep {
     .p-progressbar {
         height: 18px;
         width: 250px;
@@ -226,5 +224,16 @@
 
     .p-progressbar .p-progressbar-value {
         background: #28a745 !important;
+    }
+
+    .p-inputtext {
+        font-size: 0.8rem !important;
+        height: 34px;
+    }
+
+    .p-button , .p-button:enabled:hover{
+        background: var(--mainColor2);
+        padding: 0 !important;
+        border: none;
     }
 }

@@ -15,14 +15,12 @@
         </ol>
     </div>
 
-    <div class="add-listings-box1" *ngIf="users?.length > 0">
+    <div class="add-listings-box1">
         <p-table #dt [value]="users" dataKey="id" [rowHover]="true" [rows]="10"
             responsiveLayout="scroll" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [filterDelay]="0" [globalFilterFields]="['name','fName','mobileNo','shopName','city','coupanCode']">
             <ng-template pTemplate="caption">
-                <!-- <div class="table-header"> -->
-                <!-- List of Customers -->
                 <span class="p-input-icon-left d-flex align-items-center">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
@@ -33,22 +31,21 @@
                             </p-calendar>
                             <p-button type="button" class="ml-2" (click)="reset(dt)" icon="bx bx-reset"></p-button>
                 </span>
-                <!-- </div> -->
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th>S. No.</th>
                     <th>Bill No.</th>
-                    <th>Bill Date</th>
+                    <th style="min-width: 150px;">Bill Date</th>
                     <th>Name</th>
                     <th>Father's Name</th>
                     <th>Mobile No.</th>
                     <th>Shop Name</th>
                     <th>City</th>
-                    <th>Coupan Code</th>
+                    <th>Coupon Code</th>
                     <th>Aadhar No.</th>
                     <th>PAN</th>
-                    <th>Bar Code</th>
+                    <th>QR Code</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-customer let-i="rowIndex">
@@ -64,14 +61,12 @@
                     <td>{{customer?.coupanCode}}</td>
                     <td>{{customer?.aadharCard ? customer?.aadharCard : '-'}}</td>
                     <td>{{customer?.panCard ? customer?.panCard : '-'}}</td>
-                    <td style="text-align: center;cursor: pointer;"
-                        (click)="getImage(customer.name, customer.city, customer.mobileNo)"><i
-                            class="pi pi-download"></i></td>
+                    <td><a [href]="customer.qrCode" [download]="customer.qrCode" target="_blank"><i class="pi pi-download"></i></a></td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="8">No customers found.</td>
+                    <td colspan="8">No users found.</td>
                 </tr>
             </ng-template>
         </p-table>
