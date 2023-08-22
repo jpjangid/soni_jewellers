@@ -138,7 +138,7 @@ export class BillGenerateComponent implements OnInit {
         else{
           this.apiService.showMessage(res.message , 'error');
         }
-      })
+      })      
     }
   }
 

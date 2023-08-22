@@ -6,17 +6,17 @@
             </div>
             <div class="add-card" style="margin: auto;">
                 <div style="display: flex; justify-content: center;">
-                    <img style="width: 80px;" src="../../../../assets/img/SJ_logo__2_-removebg-preview.png" alt="">
+                    <img style="width: 80px;" src="assets/img/SJ_logo__2_-removebg-preview.png" alt="">
                 </div>
                 <p style="font-size: 20px; text-align: center; margin-bottom: 0;">{{user?.shopName}}</p>
                 <p style="font-size: 18px; text-align: center;">{{user?.name}}</p>
-                <img style="width: 80px; display: flex; justify-content: center;" [src]="user?.qrCode" alt="">
+                <img style="width: 80px; display: flex; justify-content: center;" [src]="image" alt="">
                 <p style="font-size: 18px; text-align: center;">{{user?.coupanCode}}</p>
             </div>
         </div>
         <div style="margin-top: 150px;" *ngIf="!user?.shopName">
             <div style="display: flex; justify-content: center;">
-                <img style="width: 200px;"  src="../../../../assets/img/868804-removebg-preview.png" alt="">
+                <img style="width: 200px;"  src="assets/img/868804-removebg-preview.png" alt="">
             </div>
             <p style="font-size: 20px; text-align: center;">Registration Not Found</p>
         </div>

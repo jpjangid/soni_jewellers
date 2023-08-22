@@ -21,16 +21,23 @@
             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [filterDelay]="0" [globalFilterFields]="['name','fName','mobileNo','shopName','city','coupanCode']">
             <ng-template pTemplate="caption">
-                <span class="p-input-icon-left d-flex align-items-center">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Global Search" [(ngModel)]="filterval" />
-                            <p-calendar appendTo="body" class="ml-2" dateFormat="dd-mm-yy" placeholder="Bill Date"
+                <div class="row">
+                    <div class="col-lg-3 mr-3">
+                        <span class="p-input-icon-left d-flex align-items-center">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" [(ngModel)]="filterval" />
+                        </span>
+                    </div>
+                    <div class="col-lg-8 mr-2  d-flex">
+                        <p-calendar appendTo="body" [showIcon]="true" dateFormat="dd-mm-yy" placeholder="Bill Date"
                                  [(ngModel)]="dateFilterVal"
                                 (onSelect)="searchFilter($event)">
                             </p-calendar>
-                            <p-button type="button" class="ml-2" (click)="reset(dt)" icon="bx bx-reset"></p-button>
-                </span>
+                        <p-button type="button" style="height: 2rem!important;" class="ml-2" (click)="reset(dt)" icon="bx bx-reset"></p-button>
+                        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success ml-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                    </div>
+                </div>
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
@@ -61,7 +68,7 @@
                     <td>{{customer?.coupanCode}}</td>
                     <td>{{customer?.aadharCard ? customer?.aadharCard : '-'}}</td>
                     <td>{{customer?.panCard ? customer?.panCard : '-'}}</td>
-                    <td><a [href]="customer.qrCode" [download]="customer.qrCode" target="_blank"><i class="pi pi-download"></i></a></td>
+                    <td><a (click)="downloadFile(customer)"><i class="pi pi-download"></i></a></td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">

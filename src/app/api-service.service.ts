@@ -56,7 +56,7 @@ export class ApiServiceService {
   register(formData:any) {
     return this.http.post(this._baseurl+'Registration',formData).toPromise();
   }
-  
+
   billGenerate(object:any){
     return this.http.post(this._baseurl + 'GenerateBill' , object).toPromise()
   }
@@ -71,6 +71,11 @@ export class ApiServiceService {
 
   getBarCode(registrationId:any) {
     return this.http.get(this._baseurl+'Registration/bar-code?RegistrationId=' + registrationId).toPromise();
+  }
+
+
+  getBarCodeById(registrationId:any) {
+    return this.http.get(this._baseurl+'Registration/Getbar-code?RegistrationId=' + registrationId , { responseType: 'blob' }).toPromise();
   }
 
   getAllData() {

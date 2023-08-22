@@ -94,16 +94,34 @@ export class AppUtility {
     return this._valueLoader;
   }
 
- downloadFile(data: any , name?: any) {
+  downloadFile(data: any, name?: any) {
+    var blob = new Blob([data], { type: '.png' });
+    var url = window.URL.createObjectURL(blob);
     var anchor = document.createElement("a");
-    anchor.download = "QR_Code.pdf";
-    anchor.href = data;
-    anchor.target = '_blank'
+    anchor.download = name + ".png";
+    anchor.href = url;
     anchor.click();
+    console.log(anchor , url);
   }
 
-  getImageUrl(url : any){
-    return `http://103.155.84.143:9072/SupplierOnboarding/`+url;
-  }
+  
+  exportExcel(products) {
+    console.log(products);
+    import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(products);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, "registeredUserList");
+    });
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
 
 }

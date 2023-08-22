@@ -230,7 +230,10 @@
         font-size: 0.8rem !important;
         height: 34px;
     }
+}
 
+
+:host{
     .p-button , .p-button:enabled:hover{
         background: var(--mainColor2);
         padding: 0 !important;

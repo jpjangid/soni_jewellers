@@ -99,6 +99,8 @@ export class ItemMasterComponent implements OnInit {
     }
   }
 
+  getTotalStock : any = 0;
+  getTotalFine : any = 0;
   async getAllProduct() {
     this.utility.loader(true);
     await this.apiService.getAllProductList('Product').then((res:any)=> {
@@ -106,6 +108,11 @@ export class ItemMasterComponent implements OnInit {
       this.utility.loader(false);
       if(res.status){
         this.productList = res.returnValue;
+
+        this.productList.forEach((res:any)=>{
+          this.getTotalStock = this.getTotalStock + res.stock;
+          this.getTotalFine = this.getTotalFine + (res.stock)*(res.productWt)
+        })
       }
 
       else{

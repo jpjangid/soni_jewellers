@@ -23,7 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // add auth header with jwt if account is logged in and request is to the api url
     let url = environment.base_url;
-    console.log(url + 'User/jewellerslogin');
     if ((request.url === url + 'User/jewellerslogin')) {
       return next.handle(request);
     }

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  base_url : 'https://api.adorntourism.com/api/',
+  // base_url : 'https://api.adorntourism.com/api/',
+  base_url : 'https://web.adorntourism.com/api/',
+  api_url : 'http://103.155.84.143:9091/api/',
   production: false
 };
 

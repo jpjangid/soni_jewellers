@@ -68,4 +68,16 @@ export class RegisteredUserComponent implements OnInit {
     this.dateFilterVal = ''
   }
 
+
+  exportExcel(){
+    this._utility.exportExcel(this.users);
+  }
+
+  downloadFile(customer:any){
+    this._apiService.getBarCodeById(customer.registrationId).then((res:any)=>{
+      console.log(res);
+      this._utility.downloadFile(res , 'QRCode_')
+    })
+  }
+
 }

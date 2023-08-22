@@ -12,4 +12,13 @@
     .p-datatable .p-datatable-thead > tr > th {
         white-space: nowrap;
     }
+
+    .p-button.p-button-icon-only{
+        padding: 0.3rem!important;
+    }
+
+    input,
+    select {
+        height: 35px;
+    }
 }
